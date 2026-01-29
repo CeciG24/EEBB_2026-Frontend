@@ -49,25 +49,6 @@ export function About() {
             </Card>
           ))}
         </div>
-
-        <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-          <div>
-            <div className="text-[#002fbb] mb-2" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>500+</div>
-            <p className="text-gray-600">Asistentes</p>
-          </div>
-          <div>
-            <div className="text-[#002fbb] mb-2" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>50+</div>
-            <p className="text-gray-600">Ponentes</p>
-          </div>
-          <div>
-            <div className="text-[#002fbb] mb-2" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>30+</div>
-            <p className="text-gray-600">Sesiones</p>
-          </div>
-          <div>
-            <div className="text-[#002fbb] mb-2" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>40+</div>
-            <p className="text-gray-600">Países</p>
-          </div>
-        </div>
       </div>
     </section>
   );

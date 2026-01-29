@@ -16,8 +16,8 @@ export function Donde() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
           <div className="rounded-lg overflow-hidden h-96">
             <img
-              src="https://images.unsplash.com/photo-1706885452328-1ddaf64fe0be?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx1bml2ZXJzaXR5JTIwY2FtcHVzJTIwYnVpbGRpbmd8ZW58MXx8fHwxNzYxMDEyMTgwfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-              alt="Campus Universidad Stanford"
+              src="https://www.ifuap.buap.mx/eventos/TSimulacion_Mol2013/archivos/UnidadSeminarios.jpg"
+              alt="Unidad de Seminarios BUAP"
               className="w-full h-full object-cover"
             />
           </div>
@@ -32,8 +32,8 @@ export function Donde() {
                   <div>
                     <h3 className="text-gray-900 mb-2" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>Ubicación</h3>
                     <p className="text-gray-600">
-                      Benmerita Universidad Autonoma de Puebla<br />
-                      Centro de Convenciones<br />
+                      Benemerita Universidad Autonoma de Puebla<br />
+                      Unidad de Seminarios<br />
                       Ciudad Universitaria<br />
                       Puebla, México
                     </p>
@@ -51,8 +51,8 @@ export function Donde() {
                   <div>
                     <h3 className="text-gray-900 mb-2" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>Fechas</h3>
                     <p className="text-gray-600">
-                      15 - 17 de Marzo, 2025<br />
-                      3 días de conferencias, talleres y networking
+                      26 - 27 de Marzo, 2026<br />
+                      2 días de conferencias, actividades y networking
                     </p>
                   </div>
                 </div>

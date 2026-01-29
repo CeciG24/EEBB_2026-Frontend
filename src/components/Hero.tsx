@@ -25,21 +25,23 @@ export function Hero() {
         <div className="max-w-3xl">
           <Badge className="mb-4 bg-[#a0c519]/90 hover:bg-[#a0c519] border-0">Congreso Anual</Badge>
           <h1 className="text-white mb-6" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>
-            Bioconecta 2025
+            Bioconecta 2026
           </h1>
           <p className="text-blue-100 text-lg md:text-xl mb-8 max-w-2xl">
-            Únete a investigadores, científicos y expertos de la industria líderes durante tres días de descubrimientos 
-            revolucionarios, presentaciones de investigación innovadora y oportunidades de colaboración.
+            Vive dos días de conferencias magistrales, charlas académicas, paneles profesionales
+            y actividades estudiantiles donde la biotecnología se conecta con la innovación,
+            la creatividad y el futuro profesional.
           </p>
+
 
           <div className="flex flex-col sm:flex-row gap-4 mb-8">
             <div className="flex items-center gap-2 text-white">
               <Calendar className="text-[#a0c519]" size={20} />
-              <span>15-17 de Marzo, 2025</span>
+              <span>26 y 27 de marzo de 2026</span>
             </div>
             <div className="flex items-center gap-2 text-white">
               <MapPin className="text-[#a0c519]" size={20} />
-              <span>Benemerita Universidad Autonoma de Puebla</span>
+              <span>Benemérita Universidad Autónoma de Puebla</span>
             </div>
           </div>
 

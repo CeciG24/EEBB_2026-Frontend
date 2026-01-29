@@ -60,8 +60,8 @@ export function Contacto() {
               </div>
               <h3 className="text-gray-900 mb-2" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>Dirección</h3>
               <p className="text-gray-600">
-                450 Serra Mall<br />
-                Stanford, CA 94305
+                Calle 4 Sur 104, Cd Universitaria, Col. Centro,
+                72000 Heroica Puebla de Zaragoza, Pue.
               </p>
             </CardContent>
           </Card>

@@ -68,7 +68,7 @@ export function Footer() {
               </li>
               <li className="flex items-start gap-2">
                 <MapPin size={18} className="mt-1 flex-shrink-0" />
-                <span>Benemerita universidad autonoma de Puebla</span>
+                <span>Benemérita Universidad Autónoma de Puebla</span>
               </li>
             </ul>
           </div>
@@ -93,7 +93,7 @@ export function Footer() {
         </div>
 
         <div className="border-t border-gray-800 pt-8 text-center text-gray-400">
-          <p>&copy; 2025 bioconecta. Todos los derechos reservados.</p>
+          <p>&copy; {new Date().getFullYear()} bioconecta. Todos los derechos reservados.</p>
         </div>
       </div>
     </footer>
