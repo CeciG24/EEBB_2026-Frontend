@@ -127,9 +127,7 @@ export function Registration() {
 
               <ul className="space-y-3 mb-8">
                 {[
-                  "Feria de Innovación",
-                  "Exposición de Carteles Científicos",
-                  "Muro de Arte Biotecnológico",
+                  "Participación en una convocatoria (cartel científico, feria de innovación o taller)",
                 ].map((feature, index) => (
                   <li key={index} className="flex items-start gap-3">
                     <Check

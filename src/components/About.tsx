@@ -4,23 +4,23 @@ import { Card, CardContent } from "./ui/card";
 const features = [
   {
     icon: Dna,
-    title: "Investigación de Vanguardia",
-    description: "Explora los últimos avances en ingeniería genética, tecnología CRISPR y biología molecular."
+    title: "Formación Científica",
+    description: "Conferencias y ponencias que fortalecen tu formación en biotecnología."
   },
   {
     icon: Microscope,
-    title: "Talleres Prácticos",
-    description: "Participa en sesiones prácticas dirigidas por expertos de la industria e investigadores reconocidos."
+    title: "Experiencia Práctica",
+    description: "Participa en carteles científicos, feria de innovación y actividades académicas."
   },
   {
     icon: Users,
-    title: "Red Global",
-    description: "Conecta con más de 500 profesionales de 40+ países y construye colaboraciones duraderas."
+    title: "Comunidad Biotecnológica",
+    description: "Conecta con estudiantes, egresados e investigadores en un espacio de diálogo."
   },
   {
     icon: Award,
-    title: "Premios de Excelencia",
-    description: "Reconoce contribuciones sobresalientes a la investigación e innovación en biotecnología."
+    title: "Reconocimientos Académicos",
+    description: "Constancias con valor curricular y distinciones a proyectos destacados."
   }
 ];
 
@@ -31,8 +31,7 @@ export function About() {
         <div className="text-center mb-16">
           <h2 className="text-gray-900 mb-4" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>Quiénes Somos</h2>
           <p className="text-gray-600 text-lg max-w-3xl mx-auto">
-            bioconecta reúne a las mentes más brillantes en biotecnología 
-            para compartir conocimiento, fomentar la innovación y avanzar en el campo a través de la colaboración.
+            Somos un evento estudiantil de la Licenciatura en Biotecnología BUAP que impulsa la integración, el intercambio académico y la creación de redes entre estudiantes. Un espacio para conectar generaciones, visibilizar el talento estudiantil y fortalecer la comunidad biotecnológica
           </p>
         </div>
 

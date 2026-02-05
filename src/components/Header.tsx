@@ -19,9 +19,10 @@ export function Header() {
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center gap-2">
             <div className="w-10 h-10 bg-gradient-to-br from-[#002fbb] to-[#a0c519] rounded-lg flex items-center justify-center">
-              <span className="text-white" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>BC</span>
+                <img src="/src/public/logoEEBB.png" alt="Logo EEBB" className="w-full h-full object-contain" />
             </div>
-            <span className="text-gray-900" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>bioconecta</span>
+            <span className="text-gray-900" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>Encuentro Estudiantil de Biotecnología BUAP
+2026</span>
           </div>
 
           {/* Desktop Navigation */}

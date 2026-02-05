@@ -9,6 +9,7 @@ import { Registration } from "./components/Registration";
 import { FAQ } from "./components/FAQ";
 import { Contacto } from "./components/Contacto";
 import { Footer } from "./components/Footer";
+import { Actividades } from "./components/Activities";
 
 export default function App() {
   return (
@@ -19,6 +20,7 @@ export default function App() {
         <About />
         <Objetivos />
         <Donde />
+        <Actividades />
         <Schedule />
         <Premios />
         <Registration />

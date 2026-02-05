@@ -30,11 +30,18 @@ export function Contacto() {
               </div>
               <h3 className="text-gray-900 mb-2" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>Email</h3>
               <a 
-                href="mailto:congreso@universidad.edu" 
-                className="text-[#002fbb] hover:underline"
-              >
-                congreso@universidad.edu
-              </a>
+            href="mailto:betzie.espinozah@alumno.buap.mx "
+            className="text-[#002fbb] hover:underline"
+          >
+            betzie.espinozah@alumno.buap.mx
+          </a>
+          <br />
+          <a 
+            href="mailto:valeria.lozag@alumno.buap.mx "
+            className="text-[#002fbb] hover:underline"
+          >
+            valeria.lozag@alumno.buap.mx
+          </a>
             </CardContent>
           </Card>
 
@@ -45,10 +52,10 @@ export function Contacto() {
               </div>
               <h3 className="text-gray-900 mb-2" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>Teléfono</h3>
               <a 
-                href="tel:+16507232300" 
+                href="tel:+52 2222295500 " 
                 className="text-[#002fbb] hover:underline"
               >
-                +1 (650) 723-2300
+                +52 (222) 2295500 
               </a>
             </CardContent>
           </Card>
@@ -60,8 +67,12 @@ export function Contacto() {
               </div>
               <h3 className="text-gray-900 mb-2" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>Dirección</h3>
               <p className="text-gray-600">
-                Calle 4 Sur 104, Cd Universitaria, Col. Centro,
-                72000 Heroica Puebla de Zaragoza, Pue.
+                Facultad de Ciencias Biológicas
+Blvd. Valsequillo y Av. San Claudio, Edificio 112-A
+
+Ciudad Universitaria, Col. Jardines de San Manuel,
+
+Puebla, Pue. México, C. P. 72570
               </p>
             </CardContent>
           </Card>

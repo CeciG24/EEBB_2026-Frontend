@@ -4,30 +4,38 @@ import { Card, CardContent } from "./ui/card";
 const premios = [
   {
     icon: Trophy,
-    title: "Mejor Investigación del Año",
-    prize: "$10,000 USD",
-    description: "Reconocimiento a la investigación más innovadora presentada en el congreso.",
+    title: "Reconocimiento a la Innovación Biotecnológica",
+    description: "Otorgado al proyecto que sobresalga por su originalidad, creatividad y aporte científico dentro del campo de la biotecnología.",
     color: "from-[#a0c519] to-[#8bb015]"
   },
   {
     icon: Star,
-    title: "Premio a la Innovación",
-    prize: "$7,500 USD",
-    description: "Para proyectos que demuestren aplicaciones novedosas de la biotecnología.",
+    title: "Reconocimiento al Impacto Social",
+    description: "Dirigido a la propuesta que demuestre un beneficio significativo para la sociedad, comunidades o sectores vulnerables, promoviendo el bienestar social.",
     color: "from-[#002fbb] to-[#001f8f]"
   },
   {
     icon: Award,
-    title: "Mejor Presentación de Póster",
-    prize: "$5,000 USD",
-    description: "Otorgado a la presentación de póster más destacada y comunicativa.",
+    title: "Reconocimiento al Impacto Ambiental",
+    description: "Concedido al proyecto que contribuya a la sostenibilidad, la conservación del medio ambiente o la mitigación de problemáticas ambientales.",
     color: "from-[#a0c519] to-[#8bb015]"
   },
   {
     icon: Medal,
-    title: "Premio al Investigador Joven",
-    prize: "$3,000 USD",
-    description: "Reconocimiento especial para investigadores menores de 35 años.",
+    title: "Reconocimiento a la Viabilidad del Proyecto",
+    description: "Destinado a la propuesta con mayor potencial de implementación, escalamiento o aplicación práctica en contextos reales.",
+    color: "from-[#002fbb] to-[#001f8f]"
+  },
+  {
+    icon: Award,
+    title: "Reconocimiento del Público",
+    description: "Asignado mediante votación de los asistentes, con el objetivo de fomentar la participación y el interés de la comunidad académica.",
+    color: "from-[#a0c519] to-[#8bb015]"
+  },
+  {
+    icon: Medal,
+    title: "Reconocimiento a la Presentación del Proyecto",
+    description: "Otorgado al equipo que destaque por la claridad, organización y comunicación efectiva de su propuesta durante la exposición.",
     color: "from-[#002fbb] to-[#001f8f]"
   }
 ];
@@ -37,9 +45,9 @@ export function Premios() {
     <section id="premios" className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-gray-900 mb-4" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>Premios y Reconocimientos</h2>
+          <h2 className="text-gray-900 mb-4" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>Feria de Innovación Biotecnológica y Vinculación Universitaria</h2>
           <p className="text-gray-600 text-lg max-w-3xl mx-auto">
-            Celebramos la excelencia en investigación e innovación con premios valorados en más de $25,000 USD.
+            Reconocemos la excelencia científica, la innovación biotecnológica y el compromiso académico de los proyectos participantes mediante distinciones que destacan su contribución al avance del conocimiento científico, su impacto social y ambiental, así como su aporte al fortalecimiento del bioemprendimiento, del ecosistema biotecnológico en México y del desarrollo de la bioeconomía.
           </p>
         </div>
 
@@ -53,9 +61,6 @@ export function Premios() {
                   </div>
                   <div className="flex-1">
                     <h3 className="text-gray-900 mb-2" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>{premio.title}</h3>
-                    <div className={`text-transparent bg-clip-text bg-gradient-to-r ${premio.color} inline-block mb-2`} style={{ fontFamily: 'Josefin Sans, sans-serif' }}>
-                      {premio.prize}
-                    </div>
                   </div>
                 </div>
                 <p className="text-gray-600">{premio.description}</p>
@@ -98,7 +103,7 @@ export function Premios() {
           </div>
           <div className="mt-8 text-center">
             <p className="text-gray-600">
-              Los ganadores serán anunciados durante la ceremonia de clausura el 17 de marzo.
+              Los ganadores serán anunciados durante la ceremonia de clausura el 27 de marzo.
             </p>
           </div>
         </div>

@@ -11,13 +11,13 @@ export function Footer() {
   return (
     <footer className="bg-gray-900 text-gray-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           <div>
             <div className="flex items-center gap-2 mb-4">
               <div className="w-10 h-10 bg-gradient-to-br from-[#002fbb] to-[#a0c519] rounded-lg flex items-center justify-center">
                 <span className="text-white" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>BC</span>
               </div>
-              <span className="text-white" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>bioconecta</span>
+              <span className="text-white" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>Encuentro Estudiantil Biotecnologia BUAP</span>
             </div>
             <p className="text-gray-400">
               Avanzando en la investigación biotecnológica a través de la colaboración y la innovación.
@@ -51,24 +51,6 @@ export function Footer() {
                 <button onClick={() => scrollToSection("costos")} className="hover:text-white transition-colors">
                   Inscripción
                 </button>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="text-white mb-4" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>Contacto</h3>
-            <ul className="space-y-2">
-              <li className="flex items-start gap-2">
-                <Mail size={18} className="mt-1 flex-shrink-0" />
-                <span>congreso@universidad.edu</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <Phone size={18} className="mt-1 flex-shrink-0" />
-                <span>+1 (650) 723-2300</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <MapPin size={18} className="mt-1 flex-shrink-0" />
-                <span>Benemérita Universidad Autónoma de Puebla</span>
               </li>
             </ul>
           </div>

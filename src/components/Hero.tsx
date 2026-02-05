@@ -25,7 +25,7 @@ export function Hero() {
         <div className="max-w-3xl">
           <Badge className="mb-4 bg-[#a0c519]/90 hover:bg-[#a0c519] border-0">Congreso Anual</Badge>
           <h1 className="text-white mb-6" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>
-            Bioconecta 2026
+            Encuentro Estudiantil de Biotecnología BUAP 2026
           </h1>
           <p className="text-blue-100 text-lg md:text-xl mb-8 max-w-2xl">
             Vive dos días de conferencias magistrales, charlas académicas, paneles profesionales

@@ -8,43 +8,39 @@ import {
 const faqs = [
   {
     question: "¿Cómo puedo inscribirme al congreso?",
-    answer: "Puedes inscribirte directamente a través de nuestra página web haciendo clic en el botón 'Inscribirse Ahora' en cualquiera de las opciones de pago. También puedes contactarnos por correo electrónico para asistencia personalizada."
-  },
-  {
-    question: "¿Hay descuentos disponibles?",
-    answer: "Sí, ofrecemos descuentos early bird hasta el 1 de octubre de 2025 (20% de descuento). También contamos con descuentos grupales para inscripciones de 5 o más personas. Los estudiantes tienen una tarifa especial reducida."
+    answer: "La inscripción se realiza a través de la página web oficial del evento, donde deberás completar el formulario de registro. Una vez confirmado el pago, recibirás un correo electrónico de confirmación con los detalles de tu participación."
   },
   {
     question: "¿Qué incluye mi inscripción?",
-    answer: "Tu inscripción incluye acceso a todas las sesiones plenarias, talleres, materiales del congreso, pausas para café, y comidas según el tipo de inscripción elegida. Las categorías Académico e Industria también incluyen acceso a la cena de gala y eventos especiales de networking."
+    answer: "El evento cuenta con diferentes modalidades de inscripción, según el nivel de participación. Todas incluyen acceso a las actividades académicas, kit del participante, coffee break, y constancia digital con valor curricular. Para conocer los beneficios específicos y costos de cada modalidad, consulta la sección de Costos e Inscripción en la página web del evento."
   },
   {
-    question: "¿Puedo presentar mi investigación?",
-    answer: "Sí, aceptamos presentaciones orales y pósters. La fecha límite para enviar resúmenes es el 15 de enero de 2025. Los resúmenes aceptados serán notificados antes del 15 de febrero de 2025."
+    question: "¿Puedo presentar mi investigación o proyecto?",
+    answer: "Sí. El evento contará con el Concurso de Carteles Científicos y la Feria de Innovación Biotecnológica, espacios destinados a la presentación y difusión de investigaciones, desarrollos tecnológicos y propuestas innovadoras. Los lineamientos, requisitos y fechas de participación pueden consultarse en la convocatoria correspondiente, disponible en la página web oficial del evento."
   },
   {
-    question: "¿Cómo llego al campus de Stanford?",
-    answer: "El campus está ubicado en Stanford, California. El aeropuerto más cercano es San Francisco (SFO) a 30 millas, y San José (SJC) a 15 millas. Ofrecemos servicio de shuttle desde ambos aeropuertos. También hay opciones de tren (Caltrain) y transporte local."
+    question: "¿Quiénes pueden participar en el congreso?",
+    answer: "El congreso está dirigido a estudiantes, egresados y público interesado en conocer los alcances, aplicaciones e impacto de la biotecnología. El evento se concibe como un espacio de encuentro que promueve la interacción académica, la divulgación científica y el intercambio de experiencias entre personas con distintas trayectorias formativas y profesionales.Asimismo, busca visibilizar el trabajo estudiantil, fomentar el liderazgo académico y fortalecer la comunidad biotecnológica mediante una cultura de colaboración interdisciplinaria, contribuyendo a la preparación frente a futuros retos científicos y profesionales."
   },
   {
-    question: "¿Hay alojamiento disponible?",
-    answer: "Hemos negociado tarifas especiales con hoteles cercanos. Usa el código 'BIOTECH2025' al reservar. Los precios van desde $189/noche. Las opciones incluyen Stanford Park Hotel, Sheraton Palo Alto y Westin Palo Alto."
+    question: "¿Recibiré un certificado de asistencia o participación?",
+    answer: "Sí. Todos los participantes inscritos recibirán una constancia digital de asistencia con valor curricular. "
   },
   {
-    question: "¿Recibiré un certificado de asistencia?",
-    answer: "Sí, todos los participantes inscritos recibirán un certificado de asistencia digital al finalizar el congreso. Los certificados se enviarán por correo electrónico dentro de una semana después del evento."
+    question: "¿Habrá reconocimientos para los proyectos participantes?",
+    answer: "Sí. Se otorgarán diversos reconocimientos a los proyectos que destaquen por su excelencia científica, impacto social y ambiental, viabilidad, innovación biotecnológica y presentación, así como un reconocimiento otorgado por el público."
   },
   {
-    question: "¿Qué medidas de seguridad sanitaria están implementadas?",
-    answer: "Seguimos todas las regulaciones sanitarias vigentes. Contamos con espacios amplios y bien ventilados, estaciones de desinfección en todo el venue, y protocolos de limpieza reforzados. Actualizaremos las medidas según sea necesario."
+    question: "¿El congreso será presencial, virtual o híbrido?",
+    answer: "La modalidad del congreso será presencial y se llevará a cabo en las instalaciones de la Unidad de Seminarios de Ciudad Universitaria BUAP."
   },
   {
-    question: "¿Puedo cancelar mi inscripción?",
-    answer: "Las cancelaciones realizadas hasta 30 días antes del evento recibirán un reembolso del 80%. Cancelaciones entre 15-30 días antes recibirán 50% de reembolso. No se otorgan reembolsos para cancelaciones con menos de 15 días de anticipación."
+    question: "¿Dónde puedo consultar el programa y a los ponentes?",
+    answer: "El programa académico, así como la lista de ponentes y actividades, estará disponible en la página web del congreso. "
   },
   {
-    question: "¿Habrá oportunidades de networking?",
-    answer: "Sí, hemos planificado múltiples sesiones de networking incluyendo pausas para café, almuerzos, una cena de gala, y eventos sociales específicamente diseñados para facilitar la conexión entre participantes, investigadores e industria."
+    question: "¿Dónde puedo obtener más información o resolver dudas adicionales?",
+    answer: "Para cualquier duda adicional, puedes comunicarte con el comité organizador a través del correo electrónico o redes sociales oficiales del congreso, disponibles en la sección de contacto."
   }
 ];
 
@@ -82,10 +78,17 @@ export function FAQ() {
             Nuestro equipo está aquí para ayudarte. No dudes en contactarnos.
           </p>
           <a 
-            href="mailto:congreso@universidad.edu"
+            href="mailto:betzie.espinozah@alumno.buap.mx "
             className="text-[#002fbb] hover:underline"
           >
-            congreso@universidad.edu
+            betzie.espinozah@alumno.buap.mx
+          </a>
+          <br />
+          <a 
+            href="mailto:valeria.lozag@alumno.buap.mx "
+            className="text-[#002fbb] hover:underline"
+          >
+            valeria.lozag@alumno.buap.mx
           </a>
         </div>
       </div>

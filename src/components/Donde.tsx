@@ -6,10 +6,9 @@ export function Donde() {
     <section id="donde" className="py-20 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-gray-900 mb-4" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>¿Dónde Será?</h2>
+          <h2 className="text-gray-900 mb-4" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>Sede del evento</h2>
           <p className="text-gray-600 text-lg max-w-3xl mx-auto">
-            El congreso se llevará a cabo en la Benemerita Universidad Autonoma de Puebla, una de las instituciones de investigación 
-            más prestigiosas del mundo.
+            Se realizará en la Benemérita Universidad Autónoma de Puebla (BUAP), institución pública de referencia en educación superior e investigación científica en México.
           </p>
         </div>
 
@@ -68,29 +67,13 @@ export function Donde() {
                   <div>
                     <h3 className="text-gray-900 mb-2" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>Instalaciones</h3>
                     <p className="text-gray-600">
-                      Auditorio principal con capacidad para 800 personas<br />
-                      Salas de talleres completamente equipadas<br />
+                      Auditorio principal con capacidad para 300 personas<br />
                       Área de exposición y networking
                     </p>
                   </div>
                 </div>
               </CardContent>
             </Card>
-          </div>
-        </div>
-
-        <div className="bg-[#a0c519]/10 border border-[#a0c519]/30 rounded-lg p-6">
-          <div className="flex items-start gap-3">
-            <Clock className="text-[#002fbb] flex-shrink-0 mt-1" size={20} />
-            <div>
-              <h3 className="text-gray-900 mb-2" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>Horario del Evento</h3>
-              <p className="text-gray-600">
-                Sesiones matutinas: 9:00 AM - 12:30 PM<br />
-                Almuerzo y networking: 12:30 PM - 2:00 PM<br />
-                Sesiones vespertinas: 2:00 PM - 6:00 PM<br />
-                Eventos sociales: 7:00 PM - 9:00 PM
-              </p>
-            </div>
           </div>
         </div>
       </div>
