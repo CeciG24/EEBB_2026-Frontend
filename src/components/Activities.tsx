@@ -24,6 +24,7 @@ interface Activity {
     requirements: string[];
     fechas: string;
     registroUrl?: string;
+    pdfUrl?: string;
   };
 }
 
@@ -100,7 +101,53 @@ export function Actividades() {
           "Exhibición de proyectos estudiantiles",
           "Módulos informativos universitarios",
           "Reconocimientos a innovación, impacto social y ambiental"
-        ]
+        ],
+        pdfUrl: "/convocatorias/feria-innovacion.pdf"
+      }
+    },
+    {
+      id: "7",
+      title: "Muro de Arte",
+      type: "concurso",
+      description: "Concurso de expresión artística relacionada con la biotecnología.",
+      convocatoria: {
+        fechas: "Inscripciones hasta el 20 de Marzo, 2026",
+        requirements: [
+          "Obra original relacionada con biotecnología",
+          "Formato libre: pintura, dibujo, arte digital",
+          "Registro previo obligatorio"
+        ],
+        pdfUrl: "/convocatorias/muro-de-arte.pdf"
+      }
+    },
+    {
+      id: "8",
+      title: "Concurso de Carteles",
+      type: "concurso",
+      description: "Presenta tu investigación en formato de cartel científico.",
+      convocatoria: {
+        fechas: "Inscripciones hasta el 20 de Marzo, 2026",
+        requirements: [
+          "Cartel científico con investigación original",
+          "Formato estándar de presentación",
+          "Categorías: estudiantes de licenciatura y posgrado"
+        ],
+        pdfUrl: "/convocatorias/carteles.pdf"
+      }
+    },
+    {
+      id: "9",
+      title: "Micro Charlas",
+      type: "charla",
+      description: "Breves presentaciones de proyectos estudiantiles en formato lightning talk.",
+      convocatoria: {
+        fechas: "Inscripciones hasta el 20 de Marzo, 2026",
+        requirements: [
+          "Presentación de 5-10 minutos",
+          "Tema relacionado con biotecnología",
+          "Abierto a estudiantes de todas las carreras"
+        ],
+        pdfUrl: "/convocatorias/micro-charlas.pdf"
       }
     }
   ]
@@ -142,11 +189,15 @@ export function Actividades() {
 
                 <Button
                   variant="outline"
-                  onClick={() => setActiveActivity(activity)}
+                  onClick={() => {
+                    console.log("Click en actividad:", activity);
+                    setActiveActivity(activity);
+                  }}
                 >
                   {activity.type === "concurso"
                     ? "Ver convocatoria"
                     : "Ver detalles"}
+                  
                 </Button>
               </CardContent>
             </Card>
