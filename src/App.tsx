@@ -1,33 +1,33 @@
-import { Header } from "./components/Header";
-import { Hero } from "./components/Hero";
-import { About } from "./components/About";
-import { Objetivos } from "./components/Objetivos";
-import { Donde } from "./components/Donde";
-import { Schedule } from "./components/Schedule";
-import { Premios } from "./components/Premios";
-import { Registration } from "./components/Registration";
-import { FAQ } from "./components/FAQ";
-import { Contacto } from "./components/Contacto";
-import { Footer } from "./components/Footer";
-import { Actividades } from "./components/Activities";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { ProtectedRoute } from "./components/ProtectedRoute";
+import Login    from "./pages/Login";
+import Register from "./pages/Register";
+import Dashboard from "./pages/Dashboard";
+import Admin    from "./pages/Admin";
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-white">
-      <Header />
-      <main>
-        <Hero />
-        <About />
-        <Objetivos />
-        <Donde />
-        <Actividades />
-        <Schedule />
-        <Premios />
-        <Registration />
-        <FAQ />
-        <Contacto />
-      </main>
-      <Footer />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        {/* Públicas */}
+        <Route path="/"         element={<Navigate to="/login" />} />
+        <Route path="/login"    element={<Login />} />
+        <Route path="/register" element={<Register />} />
+
+        {/* Solo alumnos y admins autenticados */}
+        <Route path="/dashboard" element={
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        } />
+
+        {/* Solo admins */}
+        <Route path="/admin" element={
+          <ProtectedRoute onlyAdmin>
+            <Admin />
+          </ProtectedRoute>
+        } />
+      </Routes>
+    </BrowserRouter>
   );
 }

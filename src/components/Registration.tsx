@@ -1,10 +1,16 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Card, CardContent } from "./ui/card";
 import { Button } from "./ui/button";
 import { Check } from "lucide-react";
 
 export function Registration() {
   const [level, setLevel] = useState<"prepa" | "uni">("uni");
+  const navigate = useNavigate();
+
+  const handleRegister = () => {
+    navigate("/register");
+  };
 
   const assistantPrice = level === "prepa" ? "$150" : "$300";
 
@@ -92,7 +98,7 @@ export function Registration() {
                 ))}
               </ul>
 
-              <Button variant="outline" className="w-full">
+              <Button variant="outline" className="w-full" onClick={handleRegister}>
                 Inscribirse Ahora
               </Button>
             </CardContent>
@@ -139,7 +145,7 @@ export function Registration() {
                 ))}
               </ul>
 
-              <Button className="w-full bg-[#002fbb] hover:bg-[#001f8f]">
+              <Button className="w-full bg-[#002fbb] hover:bg-[#001f8f]" onClick={handleRegister}>
                 Inscribirse Ahora
               </Button>
             </CardContent>
@@ -180,7 +186,7 @@ export function Registration() {
                 ))}
               </ul>
 
-              <Button variant="outline" className="w-full">
+              <Button variant="outline" className="w-full" onClick={handleRegister}>
                 Inscribirse Ahora
               </Button>
             </CardContent>

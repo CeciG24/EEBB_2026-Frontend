@@ -1,16 +1,35 @@
 import { useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, User } from "lucide-react";
 import { Button } from "./ui/button";
+import { useNavigate, useLocation } from "react-router-dom";
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-      setMobileMenuOpen(false);
+    // Si no estamos en la página principal, navegar primero
+    if (location.pathname !== "/") {
+      navigate("/");
+      setTimeout(() => {
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 100);
+    } else {
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
     }
+    setMobileMenuOpen(false);
+  };
+
+  const handleLoginClick = () => {
+    navigate("/login");
+    setMobileMenuOpen(false);
   };
 
   return (
@@ -43,6 +62,10 @@ export function Header() {
               FAQ
             </button>
             <Button onClick={() => scrollToSection("costos")}>Inscríbete</Button>
+            <Button variant="outline" onClick={handleLoginClick}>
+              <User size={16} className="mr-2" />
+              Iniciar Sesión
+            </Button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -81,6 +104,10 @@ export function Header() {
               </button>
               <Button onClick={() => scrollToSection("contacto")} className="w-full">
                 Contacto
+              </Button>
+              <Button variant="outline" onClick={handleLoginClick} className="w-full">
+                <User size={16} className="mr-2" />
+                Iniciar Sesión
               </Button>
             </div>
           </div>
