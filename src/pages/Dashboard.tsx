@@ -52,7 +52,7 @@ export default function Dashboard() {
         return;
       }
       const data = await res.json();
-      console.log("🔄 Inscripción refrescada:", {
+      console.log("Inscripción refrescada:", {
         id: data.id,
         estado: data.estado,
         comprobante_url: data.comprobante_url,
@@ -99,11 +99,11 @@ export default function Dashboard() {
   const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) {
-      console.log("⚠️ No file selected");
+      console.log("No file selected");
       return;
     }
 
-    console.log("📁 File selected:", {
+    console.log("File selected:", {
       name: file.name,
       size: file.size,
       type: file.type,
@@ -129,7 +129,7 @@ export default function Dashboard() {
       value: val instanceof File ? `File(${val.name}, ${val.size} bytes)` : val
     })));
 
-    console.log("📤 Enviando archivo al servidor...");
+    console.log("Enviando archivo al servidor...");
 
     try {
       const res = await authFetch("/mi-inscripcion", {
@@ -153,7 +153,7 @@ export default function Dashboard() {
         return;
       }
 
-      console.log("🎉 Inscripción actualizada con comprobante_url:", data.inscripcion?.comprobante_url);
+      console.log("Inscripción actualizada con comprobante_url:", data.inscripcion?.comprobante_url);
       console.log("   - ruta_comprobante:", data.inscripcion?.ruta_comprobante);
       console.log("   - estado:", data.inscripcion?.estado);
       
@@ -168,7 +168,7 @@ export default function Dashboard() {
       // Limpiar mensaje de éxito después de 3 segundos
       setTimeout(() => setUploadSuccess(false), 3000);
     } catch (error) {
-      console.error("💥 Error en handleUpload:", error);
+      console.error("Error en handleUpload:", error);
       setUploadError("Error al subir el archivo");
     } finally {
       setUploading(false);
@@ -388,9 +388,6 @@ export default function Dashboard() {
                         </p>
                       </div>
                     </div>
-                    <p className="text-xs text-red-600 font-medium">
-                      🔄 Sube un nuevo comprobante a continuación para reenviar tu inscripción a validación.
-                    </p>
                   </div>
                 )}
 
@@ -399,12 +396,6 @@ export default function Dashboard() {
                     <div className="flex items-start gap-3">
                       <Check size={20} className="text-green-600 flex-shrink-0 mt-0.5" />
                       <div>
-                        <p className="font-semibold text-green-900 text-sm">
-                          {inscripcion.estado === "pendiente" 
-                            ? "✅ Comprobante re-enviado a validación"
-                            : "✅ Comprobante subido correctamente"
-                          }
-                        </p>
                         <p className="text-xs text-green-700 mt-1">
                           {inscripcion.estado === "pendiente"
                             ? "Tu comprobante ha sido reenviado al administrador. Te notificaremos cuando sea validado."
@@ -475,7 +466,7 @@ export default function Dashboard() {
                           year: "numeric", month: "long", day: "numeric",
                         })
                       : "—"
-                    }. ¡Nos vemos en el EEBB 2026! 🎉
+                    }. ¡Nos vemos en el EEBB 2026!
                   </p>
                 </div>
               </CardContent>

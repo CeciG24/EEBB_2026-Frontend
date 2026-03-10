@@ -149,7 +149,7 @@ export default function Admin() {
 
   // ── Cambiar estado de una inscripción ──────────────────
   const cambiarEstado = async (id: number, estado: "confirmado" | "rechazado") => {
-    console.log("✏️ Cambiando estado de inscripción:", { id, nuevo_estado: estado });
+    console.log("Cambiando estado de inscripción:", { id, nuevo_estado: estado });
     setUpdatingId(id);
     try {
       const res  = await authFetch(`/admin/inscripciones/${id}/estado`, {
@@ -201,7 +201,7 @@ export default function Admin() {
         };
       });
     } catch (error) {
-      console.error("💥 Error cambiando estado:", error);
+      console.error("Error cambiando estado:", error);
     } finally {
       setUpdatingId(null);
     }
@@ -492,7 +492,7 @@ export default function Admin() {
             )}
             
             {!selected.comprobante_url && (
-              <p className="text-center text-gray-400 text-sm mb-4 py-4 bg-gray-50 rounded-lg">⚠️ Sin comprobante subido</p>
+              <p className="text-center text-gray-400 text-sm mb-4 py-4 bg-gray-50 rounded-lg">Sin comprobante subido</p>
             )}
 
             {/* Estado actual */}
@@ -503,7 +503,7 @@ export default function Admin() {
               <p className="text-sm font-bold" style={{color: selected.estado === "confirmado" ? "#166534" : selected.estado === "rechazado" ? "#991b1b" : "#92400e"}}>
                 {selected.estado === "confirmado" && "Confirmado"}
                 {selected.estado === "rechazado" && " Rechazado"}
-                {selected.estado === "pendiente" && "⏳ Pendiente de validación"}
+                {selected.estado === "pendiente" && "Pendiente de validación"}
               </p>
               {selected.validador && (
                 <p className="text-xs mt-1" style={{color: selected.estado === "confirmado" ? "#16a34a" : selected.estado === "rechazado" ? "#dc2626" : "#666"}}>
@@ -515,11 +515,12 @@ export default function Admin() {
             <div className="flex gap-3">
               {selected.estado !== "confirmado" && (
                 <Button
-                  className="flex-1 bg-green-600 hover:bg-green-700 text-white disabled:opacity-50"
-                  disabled={updatingId === selected.id || !selected.comprobante_url}
+                  variant="outline"
+                  className="flex-1 border-green-300 text-green-600 hover:bg-green-50 disabled:opacity-50"
+                  disabled={updatingId === selected.id}
                   onClick={() => cambiarEstado(selected.id, "confirmado")}
                 >
-                  {updatingId === selected.id ? "⏳ Confirmando..." : <><CheckCircle size={14} className="mr-2" /> Confirmar</>}
+                  {updatingId === selected.id ? "Confirmando..." : <><XCircle size={14} className="mr-2" /> Confirmar</>}
                 </Button>
               )}
               {selected.estado !== "rechazado" && (
@@ -529,7 +530,7 @@ export default function Admin() {
                   disabled={updatingId === selected.id}
                   onClick={() => cambiarEstado(selected.id, "rechazado")}
                 >
-                  {updatingId === selected.id ? "⏳ Rechazando..." : <><XCircle size={14} className="mr-2" /> Rechazar</>}
+                  {updatingId === selected.id ? "Rechazando..." : <><XCircle size={14} className="mr-2" /> Rechazar</>}
                 </Button>
               )}
             </div>
