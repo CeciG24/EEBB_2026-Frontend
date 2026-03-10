@@ -42,26 +42,58 @@ export default function Dashboard() {
   const [uploadError, setUploadError]     = useState<string | null>(null);
   const [uploadSuccess, setUploadSuccess] = useState(false);
 
+  // Función para refrescar la inscripción
+  const refreshInscripcion = async () => {
+    try {
+      const res = await authFetch("/mi-inscripcion");
+      if (res.status === 404) {
+        console.log("📍 No tiene inscripción después del refresco");
+        setInscripcion(null);
+        return;
+      }
+      const data = await res.json();
+      console.log("🔄 Inscripción refrescada:", {
+        id: data.id,
+        estado: data.estado,
+        comprobante_url: data.comprobante_url,
+        ruta_comprobante: data.ruta_comprobante,
+      });
+      setInscripcion(data);
+    } catch (error) {
+      console.error("❌ Error al refrescar inscripción:", error);
+    }
+  };
+
   useEffect(() => {
     const fetchInscripcion = async () => {
       try {
         const res = await authFetch("/mi-inscripcion");
         if (res.status === 404) {
-          console.log("No tiene inscripción");
+          console.log("📍 No tiene inscripción");
           setInscripcion(null);
           return;
         }
         const data = await res.json();
-        console.log("Inscripción cargada:", data);
+        console.log("✅ Inscripción cargada:", {
+          id: data.id,
+          estado: data.estado,
+          tipo: data.tipo,
+          monto: data.monto,
+          comprobante_url: data.comprobante_url,
+        });
         setInscripcion(data);
       } catch (error) {
-        console.error("Error al cargar inscripción:", error);
+        console.error("❌ Error al cargar inscripción:", error);
         setInscripcion(null);
       } finally {
         setLoadingData(false);
       }
     };
     fetchInscripcion();
+    
+    // Refrescar inscripción cada 5 segundos para detectar cambios de admin
+    const interval = setInterval(refreshInscripcion, 5000);
+    return () => clearInterval(interval);
   }, []);
 
   const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -123,9 +155,15 @@ export default function Dashboard() {
 
       console.log("🎉 Inscripción actualizada con comprobante_url:", data.inscripcion?.comprobante_url);
       console.log("   - ruta_comprobante:", data.inscripcion?.ruta_comprobante);
+      console.log("   - estado:", data.inscripcion?.estado);
       
       setInscripcion(data.inscripcion);
       setUploadSuccess(true);
+
+      // Refrescar después de 1 segundo para asegurar que cualquier cambio de admin se vea
+      setTimeout(() => {
+        refreshInscripcion();
+      }, 1000);
 
       // Limpiar mensaje de éxito después de 3 segundos
       setTimeout(() => setUploadSuccess(false), 3000);
@@ -302,15 +340,6 @@ export default function Dashboard() {
                   <div className="mb-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
                     <div className="flex items-center justify-between mb-3">
                       <span className="text-sm font-medium text-blue-900">Comprobante subido:</span>
-                      <a
-                        href={inscripcion.comprobante_url}
-                        target="_blank"
-                        rel="noreferrer"
-                        download
-                        className="text-blue-600 text-xs underline hover:text-blue-800 font-medium"
-                      >
-                        Descargar →
-                      </a>
                     </div>
 
                     {/* Vista previa */}
@@ -318,11 +347,12 @@ export default function Dashboard() {
                       {isImageFile(inscripcion.ruta_comprobante || "") ? (
                         <div className="flex flex-col items-center gap-3">
                           <img
+                            style={{ maxHeight: "400px" }}
                             src={inscripcion.comprobante_url}
                             alt="Comprobante"
                             className="max-w-full max-h-96 rounded object-contain"
                           />
-                          <p className="text-xs text-gray-500">{inscripcion.ruta_comprobante?.split("/").pop()}</p>
+              
                         </div>
                       ) : isPdfFile(inscripcion.ruta_comprobante || "") ? (
                         <div className="flex flex-col items-center gap-3 h-full justify-center">
@@ -331,18 +361,16 @@ export default function Dashboard() {
                             title="PDF Preview"
                             className="w-full h-96 rounded border border-gray-200"
                           />
-                          <p className="text-xs text-gray-600">📄 {inscripcion.ruta_comprobante?.split("/").pop()}</p>
                         </div>
                       ) : (
                         <div className="flex flex-col items-center gap-2 py-8 justify-center">
                           <FileText size={48} className="text-gray-400" />
-                          <p className="text-xs text-gray-600 text-center">{inscripcion.ruta_comprobante?.split("/").pop()}</p>
                         </div>
                       )}
                     </div>
 
                     <p className="text-xs text-blue-600">
-                      💡 Haz clic en el área de subida para reemplazar este comprobante
+                      Si deseas reemplazar este comprobante, haz click en el área de abajo para subir uno nuevo. El anterior será eliminado automáticamente al subir el nuevo archivo.
                     </p>
                   </div>
                 )}

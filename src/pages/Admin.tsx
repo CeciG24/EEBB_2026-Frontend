@@ -149,6 +149,7 @@ export default function Admin() {
 
   // ── Cambiar estado de una inscripción ──────────────────
   const cambiarEstado = async (id: number, estado: "confirmado" | "rechazado") => {
+    console.log("✏️ Cambiando estado de inscripción:", { id, nuevo_estado: estado });
     setUpdatingId(id);
     try {
       const res  = await authFetch(`/admin/inscripciones/${id}/estado`, {
@@ -157,7 +158,23 @@ export default function Admin() {
       });
       const data = await res.json();
 
-      if (!res.ok) return;
+      console.log("📨 Respuesta del servidor:", {
+        ok: res.ok,
+        status: res.status,
+        message: data.message,
+        inscripcion_estado: data.inscripcion?.estado,
+      });
+
+      if (!res.ok) {
+        console.error("❌ Error cambiando estado:", data.message || data.error);
+        return;
+      }
+
+      console.log("✅ Estado cambiado exitosamente:", {
+        id: data.inscripcion?.id,
+        estado_anterior: paginacion?.data.find((i) => i.id === id)?.estado,
+        estado_nuevo: data.inscripcion?.estado,
+      });
 
       // Actualizar lista y detalle sin recargar
       setPaginacion((prev) =>
@@ -183,6 +200,8 @@ export default function Admin() {
           rechazados:  prev.rechazados  + (estado === "rechazado"  ? 1 : 0) - (estadoAnterior === "rechazado"  ? 1 : 0),
         };
       });
+    } catch (error) {
+      console.error("💥 Error cambiando estado:", error);
     } finally {
       setUpdatingId(null);
     }
@@ -449,11 +468,11 @@ export default function Admin() {
                   {isImageFile(selected.ruta_comprobante || "") ? (
                     <div className="flex flex-col items-center gap-2">
                       <img
+                        style={{ maxHeight: "400px" }}
                         src={selected.comprobante_url}
                         alt="Comprobante"
                         className="max-w-full max-h-64 rounded object-contain"
                       />
-                      <p className="text-xs text-gray-500">{selected.ruta_comprobante?.split("/").pop()}</p>
                     </div>
                   ) : isPdfFile(selected.ruta_comprobante || "") ? (
                     <div className="flex flex-col items-center gap-2">
@@ -462,25 +481,13 @@ export default function Admin() {
                         title="PDF Preview"
                         className="w-full h-64 rounded border border-gray-200"
                       />
-                      <p className="text-xs text-gray-600">📄 {selected.ruta_comprobante?.split("/").pop()}</p>
                     </div>
                   ) : (
                     <div className="flex flex-col items-center gap-2 py-8 justify-center">
                       <FileText size={48} className="text-gray-400" />
-                      <p className="text-xs text-gray-600 text-center">{selected.ruta_comprobante?.split("/").pop()}</p>
                     </div>
                   )}
                 </div>
-
-                <a
-                  href={selected.comprobante_url}
-                  target="_blank"
-                  rel="noreferrer"
-                  download
-                  className="block w-full text-center py-2.5 px-4 rounded-lg border border-[#002fbb] text-[#002fbb] text-sm font-medium hover:bg-blue-50 transition"
-                >
-                  💾 Descargar comprobante
-                </a>
               </div>
             )}
             
@@ -488,24 +495,41 @@ export default function Admin() {
               <p className="text-center text-gray-400 text-sm mb-4 py-4 bg-gray-50 rounded-lg">⚠️ Sin comprobante subido</p>
             )}
 
+            {/* Estado actual */}
+            <div className="mb-4 p-3 rounded-lg" style={{backgroundColor: selected.estado === "confirmado" ? "#dcfce7" : selected.estado === "rechazado" ? "#fee2e2" : "#fef3c7"}}>
+              <p className="text-xs font-semibold mb-1" style={{color: selected.estado === "confirmado" ? "#166534" : selected.estado === "rechazado" ? "#991b1b" : "#92400e"}}>
+                Estado actual:
+              </p>
+              <p className="text-sm font-bold" style={{color: selected.estado === "confirmado" ? "#166534" : selected.estado === "rechazado" ? "#991b1b" : "#92400e"}}>
+                {selected.estado === "confirmado" && "✅ Confirmado"}
+                {selected.estado === "rechazado" && "❌ Rechazado"}
+                {selected.estado === "pendiente" && "⏳ Pendiente de validación"}
+              </p>
+              {selected.validador && (
+                <p className="text-xs mt-1" style={{color: selected.estado === "confirmado" ? "#16a34a" : selected.estado === "rechazado" ? "#dc2626" : "#666"}}>
+                  Validado por: {selected.validador.name}
+                </p>
+              )}
+            </div>
+
             <div className="flex gap-3">
               {selected.estado !== "confirmado" && (
                 <Button
-                  className="flex-1 bg-green-600 hover:bg-green-700 text-white"
-                  disabled={updatingId === selected.id}
+                  className="flex-1 bg-green-600 hover:bg-green-700 text-white disabled:opacity-50"
+                  disabled={updatingId === selected.id || !selected.comprobante_url}
                   onClick={() => cambiarEstado(selected.id, "confirmado")}
                 >
-                  <CheckCircle size={14} className="mr-2" /> Confirmar
+                  {updatingId === selected.id ? "⏳ Confirmando..." : <><CheckCircle size={14} className="mr-2" /> Confirmar</>}
                 </Button>
               )}
               {selected.estado !== "rechazado" && (
                 <Button
                   variant="outline"
-                  className="flex-1 border-red-300 text-red-600 hover:bg-red-50"
+                  className="flex-1 border-red-300 text-red-600 hover:bg-red-50 disabled:opacity-50"
                   disabled={updatingId === selected.id}
                   onClick={() => cambiarEstado(selected.id, "rechazado")}
                 >
-                  <XCircle size={14} className="mr-2" /> Rechazar
+                  {updatingId === selected.id ? "⏳ Rechazando..." : <><XCircle size={14} className="mr-2" /> Rechazar</>}
                 </Button>
               )}
             </div>
