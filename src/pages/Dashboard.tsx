@@ -4,7 +4,7 @@ import { Button } from "../components/ui/button";
 import { Card, CardContent } from "../components/ui/card";
 import {
   User, FileText, Upload, CheckCircle,
-  XCircle, Clock, LogOut,
+  XCircle, Clock, LogOut, Check, Trash2,
 } from "lucide-react";
 
 interface Inscripcion {
@@ -45,14 +45,17 @@ export default function Dashboard() {
   useEffect(() => {
     const fetchInscripcion = async () => {
       try {
-        const res = await authFetch("/inscripciones");
+        const res = await authFetch("/mi-inscripcion");
         if (res.status === 404) {
+          console.log("No tiene inscripción");
           setInscripcion(null);
           return;
         }
         const data = await res.json();
+        console.log("Inscripción cargada:", data);
         setInscripcion(data);
-      } catch {
+      } catch (error) {
+        console.error("Error al cargar inscripción:", error);
         setInscripcion(null);
       } finally {
         setLoadingData(false);
@@ -63,39 +66,90 @@ export default function Dashboard() {
 
   const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (!file) return;
+    if (!file) {
+      console.log("⚠️ No file selected");
+      return;
+    }
+
+    console.log("📁 File selected:", {
+      name: file.name,
+      size: file.size,
+      type: file.type,
+      lastModified: new Date(file.lastModified).toISOString(),
+    });
 
     setUploading(true);
     setUploadError(null);
     setUploadSuccess(false);
 
     const form = new FormData();
-    form.append("comprobante", file);
+    form.append("ruta_comprobante", file);
+
+    // Verificar que el FormData tiene el archivo
+    console.log("📋 FormData creado - verificación:");
+    console.log("  - instanceof FormData:", form instanceof FormData);
+    console.log("  - tiene 'ruta_comprobante':", form.has("ruta_comprobante"));
+    
+    // Mostrar el archivo en el FormData
+    const entries = Array.from(form.entries());
+    console.log("  - entries en FormData:", entries.map(([key, val]) => ({
+      key,
+      value: val instanceof File ? `File(${val.name}, ${val.size} bytes)` : val
+    })));
+
+    console.log("📤 Enviando archivo al servidor...");
 
     try {
-      const token = localStorage.getItem("token");
-      const res   = await fetch("http://localhost:8000/api/inscripciones/comprobante", {
-        method:  "POST",
-        headers: { Authorization: `Bearer ${token}`, Accept: "application/json" },
-        body:    form,
+      const res = await authFetch("/mi-inscripcion", {
+        method: "POST",
+        body: form,
+      });
+
+      console.log("📨 Respuesta del servidor:", {
+        status: res.status,
+        statusText: res.statusText,
+        headers: Object.fromEntries(res.headers.entries()),
       });
 
       const data = await res.json();
 
+      console.log("✅ Datos recibidos:", data);
+
       if (!res.ok) {
+        console.error("❌ Error en respuesta:", data.message || "Error al subir el archivo");
         setUploadError(data.message || "Error al subir el archivo");
         return;
       }
 
-      setInscripcion((prev) =>
-        prev ? { ...prev, comprobante_url: data.comprobante_url, estado: "pendiente" } : prev
-      );
+      console.log("🎉 Inscripción actualizada con comprobante_url:", data.inscripcion?.comprobante_url);
+      console.log("   - ruta_comprobante:", data.inscripcion?.ruta_comprobante);
+      
+      setInscripcion(data.inscripcion);
       setUploadSuccess(true);
+
+      // Limpiar mensaje de éxito después de 3 segundos
+      setTimeout(() => setUploadSuccess(false), 3000);
     } catch (error) {
+      console.error("💥 Error en handleUpload:", error);
       setUploadError("Error al subir el archivo");
     } finally {
       setUploading(false);
     }
+  };
+
+  const getFileType = (filename: string): string => {
+    if (!filename) return "";
+    const ext = filename.split(".").pop()?.toLowerCase();
+    return ext || "";
+  };
+
+  const isImageFile = (filename: string): boolean => {
+    const ext = getFileType(filename);
+    return ["jpg", "jpeg", "png"].includes(ext);
+  };
+
+  const isPdfFile = (filename: string): boolean => {
+    return getFileType(filename) === "pdf";
   };
 
   return (
@@ -245,29 +299,66 @@ export default function Dashboard() {
 
                 {/* Ya tiene comprobante */}
                 {inscripcion.comprobante_url && (
-                  <div className="mb-4 p-3 bg-blue-50 border border-blue-200 rounded-lg text-sm text-blue-700 flex items-center justify-between">
-                    <span>Ya tienes un comprobante subido.</span>
-                    <a
-                      href={inscripcion.comprobante_url}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="underline font-medium ml-2 hover:text-blue-900"
-                    >
-                      Ver archivo →
-                    </a>
+                  <div className="mb-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="text-sm font-medium text-blue-900">Comprobante subido:</span>
+                      <a
+                        href={inscripcion.comprobante_url}
+                        target="_blank"
+                        rel="noreferrer"
+                        download
+                        className="text-blue-600 text-xs underline hover:text-blue-800 font-medium"
+                      >
+                        Descargar →
+                      </a>
+                    </div>
+
+                    {/* Vista previa */}
+                    <div className="mb-3 p-3 bg-white rounded-lg border border-blue-100 min-h-64">
+                      {isImageFile(inscripcion.ruta_comprobante || "") ? (
+                        <div className="flex flex-col items-center gap-3">
+                          <img
+                            src={inscripcion.comprobante_url}
+                            alt="Comprobante"
+                            className="max-w-full max-h-96 rounded object-contain"
+                          />
+                          <p className="text-xs text-gray-500">{inscripcion.ruta_comprobante?.split("/").pop()}</p>
+                        </div>
+                      ) : isPdfFile(inscripcion.ruta_comprobante || "") ? (
+                        <div className="flex flex-col items-center gap-3 h-full justify-center">
+                          <iframe
+                            src={`${inscripcion.comprobante_url}#toolbar=0`}
+                            title="PDF Preview"
+                            className="w-full h-96 rounded border border-gray-200"
+                          />
+                          <p className="text-xs text-gray-600">📄 {inscripcion.ruta_comprobante?.split("/").pop()}</p>
+                        </div>
+                      ) : (
+                        <div className="flex flex-col items-center gap-2 py-8 justify-center">
+                          <FileText size={48} className="text-gray-400" />
+                          <p className="text-xs text-gray-600 text-center">{inscripcion.ruta_comprobante?.split("/").pop()}</p>
+                        </div>
+                      )}
+                    </div>
+
+                    <p className="text-xs text-blue-600">
+                      💡 Haz clic en el área de subida para reemplazar este comprobante
+                    </p>
                   </div>
                 )}
 
                 {/* Rechazado */}
                 {inscripcion.estado === "rechazado" && (
-                  <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-sm text-red-600">
-                    ❌ Tu comprobante fue rechazado. Por favor sube uno nuevo.
+                  <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-sm text-red-600 flex items-center gap-2">
+                    <XCircle size={16} />
+                    Tu comprobante fue rechazado. Por favor sube uno nuevo.
                   </div>
                 )}
 
                 {uploadSuccess && (
-                  <div className="mb-4 p-3 bg-green-50 border border-green-200 rounded-lg text-sm text-green-600">
-                    ✅ Comprobante subido correctamente. En espera de validación del administrador.
+                  <div className="mb-4 p-3 bg-green-50 border border-green-200 rounded-lg text-sm text-green-600 flex items-center gap-2">
+                    <Check size={16} />
+                    Comprobante subido correctamente. En espera de validación del administrador.
                   </div>
                 )}
 

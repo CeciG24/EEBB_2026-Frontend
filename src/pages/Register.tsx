@@ -179,9 +179,8 @@ export default function Register() {
               className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#002fbb]"
             >
               <option value="">Selecciona un nivel</option>
-              <option value="bachillerato">Bachillerato / Preparatoria</option>
-              <option value="licenciatura">Licenciatura</option>
-              <option value="posgrado">Posgrado</option>
+              <option value="preparatoria">Bachillerato / Preparatoria</option>
+              <option value="universidad">Licenciatura / Universidad / Posgrado</option>
             </select>
             {fieldError("nivel") && (
               <p className="text-red-500 text-xs mt-1">{fieldError("nivel")}</p>
@@ -203,7 +202,7 @@ export default function Register() {
             )}
           </div>
 
-          {formData.nivel === "licenciatura" && (
+          {formData.nivel === "universidad" && (
             <div className="mb-4">
               <Label htmlFor="semestre">Semestre</Label>
               <select

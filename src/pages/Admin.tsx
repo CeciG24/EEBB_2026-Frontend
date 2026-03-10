@@ -14,6 +14,7 @@ import {
   LogOut,
   ChevronLeft,
   ChevronRight,
+  FileText,
 } from "lucide-react";
 
 // ── Tipos ──────────────────────────────────────────────────
@@ -70,6 +71,22 @@ const ESTADO_STYLES: Record<string, { icon: React.ReactNode; bg: string; text: s
   rechazado:  { icon: <XCircle size={12} />,     bg: "bg-red-50",    text: "text-red-700",    border: "border-red-200"    },
 };
 
+// ── Helpers para vista previa de archivos ──────────────────
+const getFileType = (filename: string): string => {
+  if (!filename) return "";
+  const ext = filename.split(".").pop()?.toLowerCase();
+  return ext || "";
+};
+
+const isImageFile = (filename: string): boolean => {
+  const ext = getFileType(filename);
+  return ["jpg", "jpeg", "png"].includes(ext);
+};
+
+const isPdfFile = (filename: string): boolean => {
+  return getFileType(filename) === "pdf";
+};
+
 // ── Componente principal ───────────────────────────────────
 export default function Admin() {
   const { user, logout, authFetch } = useAuth();
@@ -89,8 +106,14 @@ export default function Admin() {
       try {
         const res  = await authFetch("/admin/inscripciones/estadisticas");
         const data = await res.json();
-        setStats(data);
-      } catch { /* silencioso */ }
+        if (res.ok) {
+          setStats(data);
+        } else {
+          console.error("Error fetching stats:", res.status, data);
+        }
+      } catch (error) {
+        console.error("Error fetching stats:", error);
+      }
     };
     fetchStats();
   }, []);
@@ -107,8 +130,17 @@ export default function Admin() {
 
         const res  = await authFetch(`/admin/inscripciones?${params}`);
         const data = await res.json();
-        setPaginacion(data);
-      } catch { /* silencioso */ } finally {
+        
+        if (res.ok) {
+          setPaginacion(data);
+        } else {
+          console.error("Error fetching inscripciones:", res.status, data);
+          setPaginacion(null);
+        }
+      } catch (error) {
+        console.error("Error fetching inscripciones:", error);
+        setPaginacion(null);
+      } finally {
         setLoadingData(false);
       }
     };
@@ -263,14 +295,14 @@ export default function Admin() {
                         Cargando inscripciones...
                       </td>
                     </tr>
-                  ) : paginacion?.data.length === 0 ? (
+                  ) : !paginacion || !paginacion.data || paginacion.data.length === 0 ? (
                     <tr>
                       <td colSpan={7} className="px-5 py-12 text-center text-gray-400">
                         No hay inscripciones con estos filtros
                       </td>
                     </tr>
                   ) : (
-                    paginacion?.data.map((ins) => {
+                    paginacion.data.map((ins) => {
                       const s = ESTADO_STYLES[ins.estado];
                       return (
                         <tr key={ins.id} className="hover:bg-gray-50 transition-colors">
@@ -408,17 +440,52 @@ export default function Admin() {
               ))}
             </dl>
 
-            {selected.comprobante_url ? (
+            {selected.comprobante_url && (
+              <div className="mb-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                <p className="text-sm font-medium text-blue-900 mb-3">Comprobante de pago:</p>
+                
+                {/* Vista previa */}
+                <div className="mb-3 p-3 bg-white rounded-lg border border-blue-100 min-h-48">
+                  {isImageFile(selected.ruta_comprobante || "") ? (
+                    <div className="flex flex-col items-center gap-2">
+                      <img
+                        src={selected.comprobante_url}
+                        alt="Comprobante"
+                        className="max-w-full max-h-64 rounded object-contain"
+                      />
+                      <p className="text-xs text-gray-500">{selected.ruta_comprobante?.split("/").pop()}</p>
+                    </div>
+                  ) : isPdfFile(selected.ruta_comprobante || "") ? (
+                    <div className="flex flex-col items-center gap-2">
+                      <iframe
+                        src={`${selected.comprobante_url}#toolbar=0`}
+                        title="PDF Preview"
+                        className="w-full h-64 rounded border border-gray-200"
+                      />
+                      <p className="text-xs text-gray-600">📄 {selected.ruta_comprobante?.split("/").pop()}</p>
+                    </div>
+                  ) : (
+                    <div className="flex flex-col items-center gap-2 py-8 justify-center">
+                      <FileText size={48} className="text-gray-400" />
+                      <p className="text-xs text-gray-600 text-center">{selected.ruta_comprobante?.split("/").pop()}</p>
+                    </div>
+                  )}
+                </div>
+
                 <a
-                href={selected.comprobante_url}
-                target="_blank"
-                rel="noreferrer"
-                className="block w-full text-center py-2.5 px-4 rounded-lg border border-[#002fbb] text-[#002fbb] text-sm font-medium hover:bg-blue-50 transition mb-4"
-              >
-                Ver comprobante de pago
-              </a>
-            ) : (
-              <p className="text-center text-gray-400 text-sm mb-4 py-2">Sin comprobante subido</p>
+                  href={selected.comprobante_url}
+                  target="_blank"
+                  rel="noreferrer"
+                  download
+                  className="block w-full text-center py-2.5 px-4 rounded-lg border border-[#002fbb] text-[#002fbb] text-sm font-medium hover:bg-blue-50 transition"
+                >
+                  💾 Descargar comprobante
+                </a>
+              </div>
+            )}
+            
+            {!selected.comprobante_url && (
+              <p className="text-center text-gray-400 text-sm mb-4 py-4 bg-gray-50 rounded-lg">⚠️ Sin comprobante subido</p>
             )}
 
             <div className="flex gap-3">

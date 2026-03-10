@@ -79,10 +79,16 @@ export function useAuth() {
   // ── Helper: fetch con token automático ───────────────────
   const authFetch = (endpoint: string, options: RequestInit = {}) => {
     const token = localStorage.getItem("token");
+    
+    // Detectar si estamos enviando FormData
+    const isFormData = options.body instanceof FormData;
+    
     return fetch(`${API}${endpoint}`, {
       ...options,
       headers: {
-        "Content-Type": "application/json",
+        // Si es FormData, NO establecer Content-Type (el navegador lo hace automáticamente)
+        // Si es otro tipo, usar application/json
+        ...(isFormData ? {} : { "Content-Type": "application/json" }),
         "Accept": "application/json",
         ...(token ? { Authorization: `Bearer ${token}` } : {}),
         ...options.headers,
