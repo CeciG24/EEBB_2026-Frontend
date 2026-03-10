@@ -158,7 +158,7 @@ export default function Admin() {
       });
       const data = await res.json();
 
-      console.log("📨 Respuesta del servidor:", {
+      console.log("Respuesta del servidor:", {
         ok: res.ok,
         status: res.status,
         message: data.message,
@@ -166,11 +166,11 @@ export default function Admin() {
       });
 
       if (!res.ok) {
-        console.error("❌ Error cambiando estado:", data.message || data.error);
+        console.error("Error cambiando estado:", data.message || data.error);
         return;
       }
 
-      console.log("✅ Estado cambiado exitosamente:", {
+      console.log("Estado cambiado exitosamente:", {
         id: data.inscripcion?.id,
         estado_anterior: paginacion?.data.find((i) => i.id === id)?.estado,
         estado_nuevo: data.inscripcion?.estado,
@@ -501,8 +501,8 @@ export default function Admin() {
                 Estado actual:
               </p>
               <p className="text-sm font-bold" style={{color: selected.estado === "confirmado" ? "#166534" : selected.estado === "rechazado" ? "#991b1b" : "#92400e"}}>
-                {selected.estado === "confirmado" && "✅ Confirmado"}
-                {selected.estado === "rechazado" && "❌ Rechazado"}
+                {selected.estado === "confirmado" && "Confirmado"}
+                {selected.estado === "rechazado" && " Rechazado"}
                 {selected.estado === "pendiente" && "⏳ Pendiente de validación"}
               </p>
               {selected.validador && (

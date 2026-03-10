@@ -60,7 +60,7 @@ export default function Dashboard() {
       });
       setInscripcion(data);
     } catch (error) {
-      console.error("❌ Error al refrescar inscripción:", error);
+      console.error(" Error al refrescar inscripción:", error);
     }
   };
 
@@ -74,7 +74,7 @@ export default function Dashboard() {
           return;
         }
         const data = await res.json();
-        console.log("✅ Inscripción cargada:", {
+        console.log("Inscripción cargada:", {
           id: data.id,
           estado: data.estado,
           tipo: data.tipo,
@@ -83,7 +83,7 @@ export default function Dashboard() {
         });
         setInscripcion(data);
       } catch (error) {
-        console.error("❌ Error al cargar inscripción:", error);
+        console.error(" Error al cargar inscripción:", error);
         setInscripcion(null);
       } finally {
         setLoadingData(false);
@@ -137,7 +137,7 @@ export default function Dashboard() {
         body: form,
       });
 
-      console.log("📨 Respuesta del servidor:", {
+      console.log("Respuesta del servidor:", {
         status: res.status,
         statusText: res.statusText,
         headers: Object.fromEntries(res.headers.entries()),
@@ -145,10 +145,10 @@ export default function Dashboard() {
 
       const data = await res.json();
 
-      console.log("✅ Datos recibidos:", data);
+      console.log("Datos recibidos:", data);
 
       if (!res.ok) {
-        console.error("❌ Error en respuesta:", data.message || "Error al subir el archivo");
+        console.error(" Error en respuesta:", data.message || "Error al subir el archivo");
         setUploadError(data.message || "Error al subir el archivo");
         return;
       }
@@ -377,16 +377,42 @@ export default function Dashboard() {
 
                 {/* Rechazado */}
                 {inscripcion.estado === "rechazado" && (
-                  <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-sm text-red-600 flex items-center gap-2">
-                    <XCircle size={16} />
-                    Tu comprobante fue rechazado. Por favor sube uno nuevo.
+                  <div className="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg">
+                    <div className="flex items-start gap-3 mb-3">
+                      <XCircle size={20} className="text-red-600 flex-shrink-0 mt-0.5" />
+                      <div>
+                        <h4 className="font-semibold text-red-900">Comprobante rechazado</h4>
+                        <p className="text-sm text-red-700 mt-1">
+                          El administrador ha rechazado tu comprobante porque no cumple los requisitos. 
+                          Por favor revisa que sea un comprobante válido de transferencia o depósito.
+                        </p>
+                      </div>
+                    </div>
+                    <p className="text-xs text-red-600 font-medium">
+                      🔄 Sube un nuevo comprobante a continuación para reenviar tu inscripción a validación.
+                    </p>
                   </div>
                 )}
 
                 {uploadSuccess && (
-                  <div className="mb-4 p-3 bg-green-50 border border-green-200 rounded-lg text-sm text-green-600 flex items-center gap-2">
-                    <Check size={16} />
-                    Comprobante subido correctamente. En espera de validación del administrador.
+                  <div className="mb-4 p-4 bg-green-50 border border-green-200 rounded-lg">
+                    <div className="flex items-start gap-3">
+                      <Check size={20} className="text-green-600 flex-shrink-0 mt-0.5" />
+                      <div>
+                        <p className="font-semibold text-green-900 text-sm">
+                          {inscripcion.estado === "pendiente" 
+                            ? "✅ Comprobante re-enviado a validación"
+                            : "✅ Comprobante subido correctamente"
+                          }
+                        </p>
+                        <p className="text-xs text-green-700 mt-1">
+                          {inscripcion.estado === "pendiente"
+                            ? "Tu comprobante ha sido reenviado al administrador. Te notificaremos cuando sea validado."
+                            : "En espera de validación del administrador."
+                          }
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 )}
 
@@ -417,9 +443,11 @@ export default function Dashboard() {
                   <p className={`text-sm font-medium ${uploading ? "text-gray-300" : "text-gray-600"}`}>
                     {uploading
                       ? "Subiendo archivo..."
-                      : inscripcion.comprobante_url
-                        ? "Haz clic para reemplazar el comprobante"
-                        : "Haz clic para subir tu comprobante"
+                      : inscripcion.estado === "rechazado"
+                        ? "Haz clic para subir un nuevo comprobante"
+                        : inscripcion.comprobante_url
+                          ? "Haz clic para reemplazar el comprobante"
+                          : "Haz clic para subir tu comprobante"
                     }
                   </p>
                   <p className="text-xs text-gray-400 mt-1">PDF, JPG o PNG · máx. 5 MB</p>
