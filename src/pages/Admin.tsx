@@ -427,112 +427,212 @@ export default function Admin() {
       {/* ── Modal detalle ───────────────────────────────── */}
       {selected && (
         <div
-          className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 px-4"
+          className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 px-4 py-8 overflow-y-auto"
           onClick={() => setSelected(null)}
         >
           <div
-            className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-7"
+            className="bg-white rounded-3xl shadow-2xl max-w-lg w-full overflow-hidden my-8 border-2 border-gray-100"
             onClick={(e) => e.stopPropagation()}
+            style={{ maxHeight: '90vh' }}
           >
-            <div className="flex items-center justify-between mb-6">
-              <h3 className="text-lg font-bold text-gray-900" style={{ fontFamily: "Josefin Sans, sans-serif" }}>
-                Detalle de inscripción
-              </h3>
-              <button onClick={() => setSelected(null)} className="text-gray-400 hover:text-gray-600 text-xl">✕</button>
+            {/* Header con gradiente */}
+            <div className="bg-gradient-to-r from-[#002fbb] to-[#0040dd] px-5 py-3">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h3 className="text-lg font-bold text-white mb-0.5" style={{ fontFamily: "Josefin Sans, sans-serif" }}>
+                    Detalle de Inscripción
+                  </h3>
+                  <p className="text-blue-200 text-[10px]">ID: #{selected.id}</p>
+                </div>
+                <button 
+                  onClick={() => setSelected(null)} 
+                  className="text-white hover:bg-white/20 rounded-full p-1.5 transition-all duration-200 hover:rotate-90"
+                >
+                  <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                    <path d="M4 4l10 10M4 14L14 4"/>
+                  </svg>
+                </button>
+              </div>
             </div>
 
-            <dl className="space-y-3 text-sm mb-6">
-              {[
-                { label: "Alumno",      value: selected.alumno.name },
-                { label: "Email",       value: selected.alumno.email },
-                { label: "Institución", value: selected.alumno.institucion },
-                { label: "Carrera",     value: selected.alumno.licenciatura },
-                { label: "Semestre",    value: selected.alumno.semestre ? `${selected.alumno.semestre}°` : "—" },
-                { label: "Plan",        value: TIPO_LABEL[selected.tipo] },
-                { label: "Monto",       value: `$${selected.monto.toFixed(2)} MXN` },
-                { label: "Validado por", value: selected.validador?.name ?? "Sin validar" },
-              ].map(({ label, value }) => (
-                <div key={label} className="flex justify-between py-1 border-b border-gray-50">
-                  <dt className="text-gray-400">{label}</dt>
-                  <dd className="text-gray-900 font-medium text-right max-w-[60%]">{value}</dd>
-                </div>
-              ))}
-            </dl>
+            <div className="px-5 py-4 overflow-y-auto" style={{ maxHeight: 'calc(90vh - 60px)' }}>
 
-            {selected.comprobante_url && (
-              <div className="mb-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-                <p className="text-sm font-medium text-blue-900 mb-3">Comprobante de pago:</p>
-                
-                {/* Vista previa */}
-                <div className="mb-3 p-3 bg-white rounded-lg border border-blue-100 min-h-48">
-                  {isImageFile(selected.ruta_comprobante || "") ? (
-                    <div className="flex flex-col items-center gap-2">
-                      <img
-                        style={{ maxHeight: "400px" }}
-                        src={selected.comprobante_url}
-                        alt="Comprobante"
-                        className="max-w-full max-h-64 rounded object-contain"
-                      />
-                    </div>
-                  ) : isPdfFile(selected.ruta_comprobante || "") ? (
-                    <div className="flex flex-col items-center gap-2">
+            {/* Información del alumno */}
+            <div className="bg-gradient-to-br from-gray-50 to-blue-50/30 rounded-xl p-3 mb-3 border border-gray-100">
+              <h4 className="text-[10px] font-bold text-[#002fbb] uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                <Users size={12} />
+                Información del Participante
+              </h4>
+              <dl className="grid grid-cols-2 gap-2">
+                {[
+                  { label: "Alumno",      value: selected.alumno.name, col2: false },
+                  { label: "Email",       value: selected.alumno.email, col2: false },
+                  { label: "Institución", value: selected.alumno.institucion, col2: true },
+                  { label: "Carrera",     value: selected.alumno.licenciatura, col2: true },
+                  { label: "Semestre",    value: selected.alumno.semestre ? `${selected.alumno.semestre}°` : "—", col2: false },
+                  { label: "Plan",        value: TIPO_LABEL[selected.tipo], col2: false },
+                  { label: "Monto",       value: `$${selected.monto.toFixed(2)} MXN`, col2: false },
+                  { label: "Validado por", value: selected.validador?.name ?? "Sin validar", col2: false },
+                ].map(({ label, value, col2 }) => (
+                  <div key={label} className={`${col2 ? 'col-span-2' : ''} bg-white rounded-lg px-2.5 py-1.5 border border-gray-100`}>
+                    <dt className="text-[9px] font-semibold text-gray-400 uppercase tracking-wide mb-0.5">{label}</dt>
+                    <dd className="text-[11px] text-gray-900 font-medium break-words">{value}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+
+            {/* Comprobante de pago */}
+            <div className="mb-3">
+              <h4 className="text-[10px] font-bold text-[#002fbb] uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                <FileText size={12} />
+                Comprobante de Pago
+              </h4>
+              
+              {selected.comprobante_url ? (
+                <div className="bg-gradient-to-br from-blue-50 to-indigo-50/40 border-2 border-blue-200 rounded-xl p-3 shadow-sm">
+                  <div className="bg-white rounded-lg border border-blue-100 overflow-hidden shadow-inner">
+                    {isImageFile(selected.ruta_comprobante || "") ? (
+                      <div className="flex justify-center items-center p-2">
+                        <img
+                          src={selected.comprobante_url}
+                          alt="Comprobante"
+                          className="max-w-full max-h-48 rounded object-contain shadow-lg"
+                        />
+                      </div>
+                    ) : isPdfFile(selected.ruta_comprobante || "") ? (
                       <iframe
                         src={`${selected.comprobante_url}#toolbar=0`}
                         title="PDF Preview"
-                        className="w-full h-64 rounded border border-gray-200"
+                        className="w-full h-48 border-0"
                       />
-                    </div>
-                  ) : (
-                    <div className="flex flex-col items-center gap-2 py-8 justify-center">
-                      <FileText size={48} className="text-gray-400" />
-                    </div>
-                  )}
+                    ) : (
+                      <div className="flex flex-col items-center gap-1.5 py-6">
+                        <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center">
+                          <FileText size={24} className="text-blue-500" />
+                        </div>
+                        <p className="text-gray-500 text-[10px]">Archivo adjunto</p>
+                      </div>
+                    )}
+                  </div>
+                  <a 
+                    href={selected.comprobante_url} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="mt-2 flex items-center justify-center gap-1.5 text-[10px] text-[#002fbb] hover:text-[#0040dd] font-semibold transition-colors"
+                  >
+                    <Eye size={12} />
+                    Ver en tamaño completo
+                  </a>
                 </div>
-              </div>
-            )}
-            
-            {!selected.comprobante_url && (
-              <p className="text-center text-gray-400 text-sm mb-4 py-4 bg-gray-50 rounded-lg">Sin comprobante subido</p>
-            )}
-
-            {/* Estado actual */}
-            <div className="mb-4 p-3 rounded-lg" style={{backgroundColor: selected.estado === "confirmado" ? "#dcfce7" : selected.estado === "rechazado" ? "#fee2e2" : "#fef3c7"}}>
-              <p className="text-xs font-semibold mb-1" style={{color: selected.estado === "confirmado" ? "#166534" : selected.estado === "rechazado" ? "#991b1b" : "#92400e"}}>
-                Estado actual:
-              </p>
-              <p className="text-sm font-bold" style={{color: selected.estado === "confirmado" ? "#166534" : selected.estado === "rechazado" ? "#991b1b" : "#92400e"}}>
-                {selected.estado === "confirmado" && "Confirmado"}
-                {selected.estado === "rechazado" && " Rechazado"}
-                {selected.estado === "pendiente" && "Pendiente de validación"}
-              </p>
-              {selected.validador && (
-                <p className="text-xs mt-1" style={{color: selected.estado === "confirmado" ? "#16a34a" : selected.estado === "rechazado" ? "#dc2626" : "#666"}}>
-                  Validado por: {selected.validador.name}
-                </p>
+              ) : (
+                <div className="bg-gray-50 border-2 border-dashed border-gray-200 rounded-xl p-4 text-center">
+                  <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center mx-auto mb-1.5">
+                    <FileText size={20} className="text-gray-400" />
+                  </div>
+                  <p className="text-gray-500 text-[10px] font-medium">Sin comprobante subido</p>
+                  <p className="text-gray-400 text-[9px] mt-0.5">El participante aún no ha adjuntado un comprobante</p>
+                </div>
               )}
             </div>
 
-            <div className="flex gap-3">
+            {/* Estado actual */}
+            <div className={`mb-3 p-3 rounded-xl border-2 shadow-sm ${
+              selected.estado === "confirmado" 
+                ? "bg-gradient-to-br from-green-50 to-emerald-50 border-green-300" 
+                : selected.estado === "rechazado" 
+                ? "bg-gradient-to-br from-red-50 to-rose-50 border-red-300" 
+                : "bg-gradient-to-br from-yellow-50 to-amber-50 border-yellow-300"
+            }`}>
+              <div className="flex items-start gap-2">
+                <div className={`w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 ${
+                  selected.estado === "confirmado" 
+                    ? "bg-green-100" 
+                    : selected.estado === "rechazado" 
+                    ? "bg-red-100" 
+                    : "bg-yellow-100"
+                }`}>
+                  {selected.estado === "confirmado" && <CheckCircle size={14} className="text-green-600" />}
+                  {selected.estado === "rechazado" && <XCircle size={14} className="text-red-600" />}
+                  {selected.estado === "pendiente" && <Clock size={14} className="text-yellow-600" />}
+                </div>
+                <div className="flex-1">
+                  <p className={`text-[9px] font-bold uppercase tracking-wider mb-0.5 ${
+                    selected.estado === "confirmado" 
+                      ? "text-green-600" 
+                      : selected.estado === "rechazado" 
+                      ? "text-red-600" 
+                      : "text-yellow-700"
+                  }`}>
+                    Estado de la Inscripción
+                  </p>
+                  <p className={`text-xs font-bold ${
+                    selected.estado === "confirmado" 
+                      ? "text-green-800" 
+                      : selected.estado === "rechazado" 
+                      ? "text-red-800" 
+                      : "text-yellow-800"
+                  }`}>
+                    {selected.estado === "confirmado" && "✓ Confirmado"}
+                    {selected.estado === "rechazado" && "✗ Rechazado"}
+                    {selected.estado === "pendiente" && "⏳ Pendiente de Validación"}
+                  </p>
+                  {selected.validador && (
+                    <p className={`text-[9px] mt-1 font-medium ${
+                      selected.estado === "confirmado" 
+                        ? "text-green-700" 
+                        : selected.estado === "rechazado" 
+                        ? "text-red-700" 
+                        : "text-yellow-700"
+                    }`}>
+                      👤 Validado por: <span className="font-bold">{selected.validador.name}</span>
+                    </p>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            {/* Acciones */}
+            <div className="flex gap-2">
               {selected.estado !== "confirmado" && (
                 <Button
-                  variant="outline"
-                  className="flex-1 border-green-300 text-green-600 hover:bg-green-50 disabled:opacity-50"
+                  className="flex-1 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-black font-bold py-2 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed border-0 text-xs"
                   disabled={updatingId === selected.id}
                   onClick={() => cambiarEstado(selected.id, "confirmado")}
                 >
-                  {updatingId === selected.id ? "Confirmando..." : <><XCircle size={14} className="mr-2" /> Confirmar</>}
+                  {updatingId === selected.id ? (
+                    <span className="flex items-center gap-1.5">
+                      <div className="w-3 h-3 border-2 border-black border-t-transparent rounded-full animate-spin" />
+                      Confirmando...
+                    </span>
+                  ) : (
+                    <span className="flex items-center gap-1.5">
+                      <CheckCircle size={14} />
+                      Confirmar Pago
+                    </span>
+                  )}
                 </Button>
               )}
               {selected.estado !== "rechazado" && (
                 <Button
-                  variant="outline"
-                  className="flex-1 border-red-300 text-red-600 hover:bg-red-50 disabled:opacity-50"
+                  className="flex-1 bg-gradient-to-r from-red-500 to-rose-600 hover:from-red-600 hover:to-rose-700 text-black font-bold py-2 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed border-0 text-xs"
                   disabled={updatingId === selected.id}
                   onClick={() => cambiarEstado(selected.id, "rechazado")}
                 >
-                  {updatingId === selected.id ? "Rechazando..." : <><XCircle size={14} className="mr-2" /> Rechazar</>}
+                  {updatingId === selected.id ? (
+                    <span className="flex items-center gap-1.5">
+                      <div className="w-3 h-3 border-2 border-black border-t-transparent rounded-full animate-spin" />
+                      Rechazando...
+                    </span>
+                  ) : (
+                    <span className="flex items-center gap-1.5">
+                      <XCircle size={14} />
+                      Rechazar Pago
+                    </span>
+                  )}
                 </Button>
               )}
+            </div>
             </div>
           </div>
         </div>

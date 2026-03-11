@@ -5,6 +5,7 @@ import { Footer } from "../components/Footer";
 import { Label } from "../components/ui/label";
 import { Input } from "../components/ui/input";
 import { Button } from "../components/ui/button";
+import { translateError } from "../utils/errorTranslations";
 
 export default function Login() {
   const { login } = useAuth();
@@ -23,7 +24,7 @@ export default function Login() {
       await login({ email, password });
       // useAuth redirige a /dashboard o /admin automáticamente
     } catch (err) {
-      setError((err as Error).message);
+      setError(translateError((err as Error).message));
     } finally {
       setLoading(false);
     }
