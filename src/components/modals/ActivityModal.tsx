@@ -96,7 +96,7 @@ export function ActivityModal({ activity, onClose }: Props) {
           }}
           aria-label="Cerrar"
         >
-          {"✕"}
+          <i className="fa-solid fa-xmark" aria-hidden="true" />
         </button>
 
         {/* Header */}

@@ -437,7 +437,7 @@ export default function Admin() {
           >
             {/* Header con gradiente */}
             <div className="bg-gradient-to-r from-[#002fbb] to-[#0040dd] px-5 py-3">
-              <div className="flex items-center justify-between">
+              <div className="flex2 items-center justify-between">
                 <div>
                   <h3 className="text-lg font-bold text-white mb-0.5" style={{ fontFamily: "Josefin Sans, sans-serif" }}>
                     Detalle de Inscripción
@@ -544,20 +544,20 @@ export default function Admin() {
                 ? "bg-gradient-to-br from-red-50 to-rose-50 border-red-300" 
                 : "bg-gradient-to-br from-yellow-50 to-amber-50 border-yellow-300"
             }`}>
-              <div className="flex items-start gap-2">
-                <div className={`w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 ${
-                  selected.estado === "confirmado" 
-                    ? "bg-green-100" 
-                    : selected.estado === "rechazado" 
-                    ? "bg-red-100" 
-                    : "bg-yellow-100"
-                }`}>
-                  {selected.estado === "confirmado" && <CheckCircle size={14} className="text-green-600" />}
-                  {selected.estado === "rechazado" && <XCircle size={14} className="text-red-600" />}
-                  {selected.estado === "pendiente" && <Clock size={14} className="text-yellow-600" />}
-                </div>
+                
                 <div className="flex-1">
-                  <p className={`text-[9px] font-bold uppercase tracking-wider mb-0.5 ${
+                  <div className={`w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 ${
+                    selected.estado === "confirmado" 
+                      ? "bg-green-100" 
+                      : selected.estado === "rechazado" 
+                      ? "bg-red-100" 
+                      : "bg-yellow-100"
+                  }`}>
+                    {selected.estado === "confirmado" && <CheckCircle size={14} className="text-green-600" />}
+                    {selected.estado === "rechazado" && <XCircle size={14} className="text-red-600" />}
+                    {selected.estado === "pendiente" && <Clock size={14} className="text-yellow-600" />}
+                  </div>
+                  <p className={`text-[11px] font-bold text-center uppercase tracking-wider mb-0.5 ${
                     selected.estado === "confirmado" 
                       ? "text-green-600" 
                       : selected.estado === "rechazado" 
@@ -573,9 +573,24 @@ export default function Admin() {
                       ? "text-red-800" 
                       : "text-yellow-800"
                   }`}>
-                    {selected.estado === "confirmado" && "✓ Confirmado"}
-                    {selected.estado === "rechazado" && "✗ Rechazado"}
-                    {selected.estado === "pendiente" && "⏳ Pendiente de Validación"}
+                    {selected.estado === "confirmado" && (
+                      <span className="inline-flex items-center gap-1.5">
+                        <i className="fa-solid fa-circle-check" aria-hidden="true" />
+                        Confirmado
+                      </span>
+                    )}
+                    {selected.estado === "rechazado" && (
+                      <span className="inline-flex items-center gap-1.5">
+                        <i className="fa-solid fa-circle-xmark" aria-hidden="true" />
+                        Rechazado
+                      </span>
+                    )}
+                    {selected.estado === "pendiente" && (
+                      <span className="inline-flex items-center gap-1.5">
+                        <i className="fa-solid fa-hourglass-half" aria-hidden="true" />
+                        Pendiente de Validación
+                      </span>
+                    )}
                   </p>
                   {selected.validador && (
                     <p className={`text-[9px] mt-1 font-medium ${
@@ -585,11 +600,13 @@ export default function Admin() {
                         ? "text-red-700" 
                         : "text-yellow-700"
                     }`}>
-                      👤 Validado por: <span className="font-bold">{selected.validador.name}</span>
+                      <span className="inline-flex items-center gap-1">
+                        <i className="fa-solid fa-user" aria-hidden="true" />
+                        Validado por: <span className="font-bold">{selected.validador.name}</span>
+                      </span>
                     </p>
                   )}
                 </div>
-              </div>
             </div>
 
             {/* Acciones */}

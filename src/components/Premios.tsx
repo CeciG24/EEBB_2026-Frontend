@@ -74,28 +74,28 @@ export function Premios() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             <div className="text-center">
               <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center mx-auto mb-3 shadow-sm">
-                <span>📊</span>
+                <i className="fa-solid fa-chart-column text-[#002fbb]" aria-hidden="true" />
               </div>
               <p className="text-gray-900 mb-1" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>Originalidad</p>
               <p className="text-gray-600">Innovación y creatividad</p>
             </div>
             <div className="text-center">
               <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center mx-auto mb-3 shadow-sm">
-                <span>🔬</span>
+                <i className="fa-solid fa-microscope text-[#002fbb]" aria-hidden="true" />
               </div>
               <p className="text-gray-900 mb-1" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>Rigor Científico</p>
               <p className="text-gray-600">Metodología robusta</p>
             </div>
             <div className="text-center">
               <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center mx-auto mb-3 shadow-sm">
-                <span>💡</span>
+                <i className="fa-solid fa-lightbulb text-[#002fbb]" aria-hidden="true" />
               </div>
               <p className="text-gray-900 mb-1" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>Impacto</p>
               <p className="text-gray-600">Relevancia y aplicabilidad</p>
             </div>
             <div className="text-center">
               <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center mx-auto mb-3 shadow-sm">
-                <span>📢</span>
+                <i className="fa-solid fa-bullhorn text-[#002fbb]" aria-hidden="true" />
               </div>
               <p className="text-gray-900 mb-1" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>Comunicación</p>
               <p className="text-gray-600">Claridad y presentación</p>

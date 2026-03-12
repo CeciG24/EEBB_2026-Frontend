@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Test Register API</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <style>
         body { font-family: monospace; padding: 20px; }
         input { display: block; width: 300px; padding: 5px; margin: 5px 0; }
@@ -20,12 +21,25 @@
     <pre id="output"></pre>
 
     <script>
-        const log = (msg, isError = false) => {
+        const log = (msg, isError = false, isSuccess = false) => {
             const el = document.getElementById('output');
-            const span = document.createElement('div');
-            span.textContent = msg;
-            if (isError) span.className = 'error';
-            el.appendChild(span);
+            const line = document.createElement('div');
+
+            if (isError || isSuccess) {
+                const icon = document.createElement('i');
+                icon.className = isError ? 'fa-solid fa-circle-xmark' : 'fa-solid fa-circle-check';
+                icon.style.marginRight = '6px';
+                line.appendChild(icon);
+            }
+
+            const text = document.createElement('span');
+            text.textContent = msg;
+            line.appendChild(text);
+
+            if (isError) line.className = 'error';
+            if (isSuccess) line.className = 'success';
+
+            el.appendChild(line);
             el.scrollTop = el.scrollHeight;
         };
         
@@ -65,12 +79,12 @@
                 log('Response: ' + JSON.stringify(json, null, 2));
                 
                 if (response.ok) {
-                    log('✓ Registro exitoso!', false);
+                    log('Registro exitoso!', false, true);
                 } else {
-                    log('✗ Error en la respuesta', true);
+                    log('Error en la respuesta', true);
                 }
             } catch (error) {
-                log('✗ Error de conexión: ' + error.message, true);
+                log('Error de conexión: ' + error.message, true);
             }
         };
     </script>
