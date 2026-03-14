@@ -47,7 +47,7 @@ export default function Dashboard() {
     try {
       const res = await authFetch("/mi-inscripcion");
       if (res.status === 404) {
-        console.log("📍 No tiene inscripción después del refresco");
+        console.log("[fa-location-dot] No tiene inscripción después del refresco");
         setInscripcion(null);
         return;
       }
@@ -69,7 +69,7 @@ export default function Dashboard() {
       try {
         const res = await authFetch("/mi-inscripcion");
         if (res.status === 404) {
-          console.log("📍 No tiene inscripción");
+          console.log("[fa-location-dot] No tiene inscripción");
           setInscripcion(null);
           return;
         }
@@ -118,7 +118,7 @@ export default function Dashboard() {
     form.append("ruta_comprobante", file);
 
     // Verificar que el FormData tiene el archivo
-    console.log("📋 FormData creado - verificación:");
+    console.log("[fa-clipboard-list] FormData creado - verificación:");
     console.log("  - instanceof FormData:", form instanceof FormData);
     console.log("  - tiene 'ruta_comprobante':", form.has("ruta_comprobante"));
     

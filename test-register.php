@@ -22,10 +22,10 @@ $testData = [
 try {
     echo "Intentando crear usuario...\n";
     $user = User::create($testData);
-    echo "✓ Usuario creado exitosamente!\n";
+    echo "[OK] Usuario creado exitosamente!\n";
     echo "UID: " . $user->id . "\n";
     echo "Email: " . $user->email . "\n";
 } catch (\Exception $e) {
-    echo "✗ Error: " . $e->getMessage() . "\n";
+    echo "[ERROR] " . $e->getMessage() . "\n";
     echo $e->getTraceAsString();
 }
