@@ -557,7 +557,7 @@ export default function Admin() {
             )}
 
             {/* Header con gradiente */}
-            <div className="bg-gradient-to-r from-[#002fbb] to-[#0040dd] px-5 py-3">
+            <div className="bg-gradient-to-r from-[#002fbb] to-[#0040dd] px-4 sm:px-5 py-3">
               <div className="flex items-center justify-between">
                 <div>
                   <h3 className="text-base sm:text-lg font-bold text-white mb-0.5" style={{ fontFamily: "Josefin Sans, sans-serif" }}>
@@ -567,9 +567,9 @@ export default function Admin() {
                 </div>
                 <button
                   onClick={() => setSelected(null)}
-                  className="text-black bg-white/20 hover:bg-white/40 rounded-full p-1.5 transition-all duration-200 hover:rotate-90"
+                  className="text-white hover:bg-white/20 rounded-full p-1.5 transition-all duration-200 hover:rotate-90"
                 >
-                  <X size={20} />
+                  <X size={18} />
                 </button>
               </div>
             </div>
@@ -654,32 +654,28 @@ export default function Admin() {
                 )}
               </div>
 
-            {/* Estado actual */}
-            <div className={`mb-3 p-3 rounded-xl border-2 shadow-sm ${
-              selected.estado === "confirmado" 
-                ? "bg-gradient-to-br from-green-50 to-emerald-50 border-green-300" 
-                : selected.estado === "rechazado" 
-                ? "bg-gradient-to-br from-red-50 to-rose-50 border-red-300" 
-                : "bg-gradient-to-br from-yellow-50 to-amber-50 border-yellow-300"
-            }`}>
-              <div className="flex items-start gap-2">
-                <div className={`w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 ${
-                  selected.estado === "confirmado" 
-                    ? "bg-green-100" 
-                    : selected.estado === "rechazado" 
-                    ? "bg-red-100" 
+              {/* Estado actual */}
+              <div className={`mb-3 p-3 rounded-xl border-2 shadow-sm ${
+                selected.estado === "confirmado"
+                  ? "bg-gradient-to-br from-green-50 to-emerald-50 border-green-300"
+                  : selected.estado === "rechazado"
+                  ? "bg-gradient-to-br from-red-50 to-rose-50 border-red-300"
+                  : "bg-gradient-to-br from-yellow-50 to-amber-50 border-yellow-300"
+              }`}>
+                <div className="flex items-start gap-2">
+                  <div className={`w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 ${
+                    selected.estado === "confirmado" ? "bg-green-100"
+                    : selected.estado === "rechazado" ? "bg-red-100"
                     : "bg-yellow-100"
-                }`}>
-                  {selected.estado === "confirmado" && <CheckCircle size={14} className="text-green-600" />}
-                  {selected.estado === "rechazado" && <XCircle size={14} className="text-red-600" />}
-                  {selected.estado === "pendiente" && <Clock size={14} className="text-yellow-600" />}
-                </div>
-                <div className="flex-1">
-                  <p className={`text-[9px] font-bold uppercase tracking-wider mb-0.5 ${
-                    selected.estado === "confirmado" 
-                      ? "text-green-600" 
-                      : selected.estado === "rechazado" 
-                      ? "text-red-600" 
+                  }`}>
+                    {selected.estado === "confirmado" && <CheckCircle size={14} className="text-green-600" />}
+                    {selected.estado === "rechazado"  && <XCircle size={14}     className="text-red-600" />}
+                    {selected.estado === "pendiente"  && <Clock size={14}        className="text-yellow-600" />}
+                  </div>
+                  <div className="flex-1">
+                    <p className={`text-[9px] font-bold uppercase tracking-wider mb-0.5 ${
+                      selected.estado === "confirmado" ? "text-green-600"
+                      : selected.estado === "rechazado" ? "text-red-600"
                       : "text-yellow-700"
                     }`}>
                       Estado de la Inscripción
@@ -688,25 +684,23 @@ export default function Admin() {
                       selected.estado === "confirmado" ? "text-green-800"
                       : selected.estado === "rechazado" ? "text-red-800"
                       : "text-yellow-800"
-                  }`}>
-                    {selected.estado === "confirmado" && "✓ Confirmado"}
-                    {selected.estado === "rechazado" && "✗ Rechazado"}
-                    {selected.estado === "pendiente" && "⏳ Pendiente de Validación"}
-                  </p>
-                  {selected.validador && (
-                    <p className={`text-[9px] mt-1 font-medium ${
-                      selected.estado === "confirmado" 
-                        ? "text-green-700" 
-                        : selected.estado === "rechazado" 
-                        ? "text-red-700" 
-                        : "text-yellow-700"
                     }`}>
-                      👤 Validado por: <span className="font-bold">{selected.validador.name}</span>
+                      {selected.estado === "confirmado" && "✓ Confirmado"}
+                      {selected.estado === "rechazado"  && "✗ Rechazado"}
+                      {selected.estado === "pendiente"  && "Pendiente de Validación"}
                     </p>
-                  )}
+                    {selected.validador && (
+                      <p className={`text-[9px] mt-1 font-medium ${
+                        selected.estado === "confirmado" ? "text-green-700"
+                        : selected.estado === "rechazado" ? "text-red-700"
+                        : "text-yellow-700"
+                      }`}>
+                        Validado por: <span className="font-bold">{selected.validador.name}</span>
+                      </p>
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
 
               {/* Acciones */}
               <div className="flex gap-2 pb-2">
