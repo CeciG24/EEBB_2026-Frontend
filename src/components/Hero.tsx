@@ -37,7 +37,7 @@ export function Hero() {
           <div className="flex flex-col sm:flex-row gap-4 mb-8">
             <div className="flex items-center gap-2 text-white">
               <Calendar className="text-[#a0c519]" size={20} />
-              <span>26 y 27 de marzo de 2026</span>
+              <span>16 y 17 de abril de 2026</span>
             </div>
             <div className="flex items-center gap-2 text-white">
               <MapPin className="text-[#a0c519]" size={20} />

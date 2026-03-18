@@ -3,14 +3,15 @@ import { ProtectedRoute } from "./components/ProtectedRoute";
 import Login    from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
-import Admin    from "./pages/Admin";
+import Admin from "./pages/Admin";
+import Home from "./pages/Home";
 
 export default function App() {
   return (
     <BrowserRouter>
       <Routes>
         {/* Públicas */}
-        <Route path="/"         element={<Navigate to="/login" />} />
+        <Route path="/"         element={<Home />} />
         <Route path="/login"    element={<Login />} />
         <Route path="/register" element={<Register />} />
 
