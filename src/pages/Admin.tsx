@@ -390,12 +390,12 @@ export default function Admin() {
               icon: <DollarSign size={18} />, color: "text-[#a0c519]", bg: "bg-lime-50" },
           ].map(({ label, value, icon, color, bg }) => (
             <Card key={label} className="border-gray-200 bg-white">
-              <CardContent className="p-3 sm:p-5">
+              <CardContent className="p-3 sm:p-5 flex flex-col items-center justify-center text-center">
                 <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-lg ${bg} flex items-center justify-center mb-2 sm:mb-3`}>
                   <span className={color}>{icon}</span>
                 </div>
-                <p className="text-xl sm:text-2xl font-bold text-gray-900 mb-0.5 leading-none">{value}</p>
-                <p className="text-[10px] sm:text-xs text-gray-500 mt-1">{label}</p>
+                <p className="text-xl sm:text-2xl font-bold text-gray-900 mb-0.5 leading-none text-center">{value}</p>
+                <p className="text-[10px] sm:text-xs text-gray-500 mt-1 text-center">{label}</p>
               </CardContent>
             </Card>
           ))}
@@ -1017,7 +1017,10 @@ export default function Admin() {
                   {selectedTrab.comentario_admin && (
                     <div className="mb-3 p-3 bg-red-50 border border-red-200 rounded-xl">
                       <p className="text-[9px] font-bold text-red-600 uppercase tracking-wide mb-1">Comentario anterior</p>
-                      <p className="text-xs text-red-700">💬 {selectedTrab.comentario_admin}</p>
+                      <p className="text-xs text-red-700">
+                        <i className="fa-solid fa-comments mr-1" aria-hidden="true"></i>
+                        {selectedTrab.comentario_admin}
+                      </p>
                     </div>
                   )}
 

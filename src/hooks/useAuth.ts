@@ -135,7 +135,7 @@ export function useAuth() {
     localStorage.setItem("token", json.token);
     localStorage.setItem("user", JSON.stringify(json.user));
     setUser(json.user);
-    navigate("/dashboard");
+    json.user.rol === "admin" ? navigate("/admin") : navigate("/dashboard");
   };
 
   // ── Logout ────────────────────────────────────────────────

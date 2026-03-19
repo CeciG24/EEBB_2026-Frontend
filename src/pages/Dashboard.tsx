@@ -69,9 +69,9 @@ const CONVOCATORIAS: {
   {
     tipo:        "feria_innovacion",
     label:       "Feria de Innovación",
-    descripcion: "Sube tu resumen en PDF o documento",
-    accept:      ".pdf,.doc,.docx",
-    formatLabel: "PDF, DOC, DOCX · máx. 10 MB",
+    descripcion: "Sube tu resumen en PDF o imagen",
+    accept:      ".pdf,.jpg,.jpeg,.png",
+    formatLabel: "PDF, JPG, PNG · máx. 10 MB",
   },
   {
     tipo:        "muro_arte",
@@ -168,6 +168,7 @@ export default function Dashboard() {
     tipo: "concurso_carteles" | "feria_innovacion" | "muro_arte",
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
+    const input = e.target;
     const file = e.target.files?.[0];
     if (!file) return;
 
@@ -186,12 +187,22 @@ export default function Dashboard() {
         body:    form,
       });
       const data = await res.json();
-      if (!res.ok) { setTrabajoError(data.message || "Error al subir el trabajo"); return; }
+      if (!res.ok) {
+        const backendFieldError = data?.errors?.archivo?.[0];
+        setTrabajoError(
+          data?.error ||
+          data?.message ||
+          backendFieldError ||
+          "Error al subir el trabajo"
+        );
+        return;
+      }
       setTrabajos((prev) => [...prev.filter((t) => t.tipo_convocatoria !== tipo), data]);
     } catch {
       setTrabajoError("No se pudo conectar con el servidor");
     } finally {
       setUploadingTrabajo(null);
+      input.value = "";
     }
   };
 
@@ -250,7 +261,7 @@ export default function Dashboard() {
             className="text-2xl font-bold text-gray-900"
             style={{ fontFamily: "Josefin Sans, sans-serif" }}
           >
-            Bienvenido, {user?.name.split(" ")[0]} 👋
+            Bienvenido, {user?.name.split(" ")[0]}{" "}
           </h2>
           <p className="text-gray-500 text-sm mt-1">
             Aquí puedes revisar tu inscripción y subir tus documentos.
@@ -452,7 +463,8 @@ export default function Dashboard() {
                       ? new Date(inscripcion.fecha_confirmacion).toLocaleDateString("es-MX", {
                           year: "numeric", month: "long", day: "numeric",
                         })
-                      : "—"}. ¡Nos vemos en el EEBB 2026! 🎉
+                      : "—"}. ¡Nos vemos en el EEBB 2026!{" "}
+                    <i className="fa-solid fa-party-horn text-amber-500" aria-hidden="true"></i>
                   </p>
                 </div>
               </CardContent>
@@ -484,7 +496,7 @@ export default function Dashboard() {
                   </div>
                 )}
 
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
                   {convocatoriasVisibles().map((conv) => {
                     const trabajo     = trabajos.find((t) => t.tipo_convocatoria === conv.tipo);
                     const isUploading = uploadingTrabajo === conv.tipo;
@@ -525,33 +537,36 @@ export default function Dashboard() {
 
                         {/* Zona de subida */}
                         {(!trabajo || trabajo.estado === "rechazado") && (
-                          <label className={`flex flex-col items-center justify-center flex-grow min-h-24 border-2 border-dashed rounded-xl cursor-pointer transition mt-auto
+                          <>
+                            <label className={`flex flex-col items-center justify-center h-20 border-2 border-dashed rounded-xl cursor-pointer transition mt-3
                             ${isUploading
                               ? "border-gray-200 bg-white cursor-not-allowed"
                               : "border-gray-300 hover:border-[#002fbb] hover:bg-blue-50"
                             }`}
-                          >
-                            <input
-                              type="file"
-                              accept={conv.accept}
-                              onChange={(e) => handleUploadTrabajo(conv.tipo, e)}
-                              className="hidden"
-                              disabled={!!uploadingTrabajo}
-                            />
-                            <Upload size={18} className={`mb-1 ${isUploading ? "text-gray-300" : "text-gray-400"}`} />
-                            <p className={`text-xs font-medium text-center px-2 ${isUploading ? "text-gray-300" : "text-gray-600"}`}>
-                              {isUploading ? "Subiendo..." : trabajo ? "Reemplazar archivo" : "Subir archivo"}
-                            </p>
-                            <p className="text-[10px] text-gray-400 mt-0.5 text-center px-2">
+                            >
+                              <input
+                                type="file"
+                                accept={conv.accept}
+                                onChange={(e) => handleUploadTrabajo(conv.tipo, e)}
+                                className="hidden"
+                                disabled={!!uploadingTrabajo}
+                              />
+                              <Upload size={18} className={`mb-1 ${isUploading ? "text-gray-300" : "text-gray-400"}`} />
+                              <p className={`text-xs font-medium text-center px-2 ${isUploading ? "text-gray-300" : "text-gray-600"}`}>
+                                {isUploading ? "Subiendo..." : trabajo ? "Reemplazar archivo" : "Subir archivo"}
+                              </p>
+                            </label>
+                            <p className="text-[10px] text-gray-400 mt-1 text-center px-2">
                               {conv.formatLabel}
                             </p>
-                          </label>
+                          </>
                         )}
 
-                        {/* Aceptado: no se puede modificar */}
+                        {/* Aceptado */}
                         {trabajo?.estado === "aceptado" && (
                           <p className="text-xs text-center text-gray-400 mt-2 py-2 bg-white rounded-lg border border-gray-100">
-                            ✅ Trabajo aceptado. Ya no puede modificarse.
+                            <i className="fa-solid fa-circle-check text-green-600 mr-1" aria-hidden="true"></i>
+                            Trabajo aceptado. Ya no puede modificarse.
                           </p>
                         )}
 
