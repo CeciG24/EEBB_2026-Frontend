@@ -307,6 +307,9 @@ export default function Register() {
               <option value="experiencia_total">
                 Experiencia Total — $600
               </option>
+              <option value="admin">
+                Admin
+              </option>
             </select>
           </Field>
 
