@@ -4,9 +4,9 @@ import { Card, CardContent } from "./ui/card";
 import { Button } from "./ui/button";
 import { ActivityModal } from "./modals/ActivityModal";
 
-type ActivityType = "charla" | "concurso" | "panel" | "feria";
+export type ActivityType = "BioTalk" | "Convocatoria" | "Panel" | "Ponencia";
 
-interface Activity {
+export interface Activity {
   id: string;
   title: string;
   type: ActivityType;
@@ -21,148 +21,163 @@ interface Activity {
   };
 
   convocatoria?: {
-    requirements: string[];
-    fechas: string;
     registroUrl?: string;
     pdfUrl?: string;
+    why?: string[];
+    awards?: string[];
   };
 }
 
 export function Actividades() {
-    const activities: Activity[] = [
+  const activities: Activity[] = [
     {
       id: "1",
-      title: "Conferencia Magistral",
-      type: "charla",
-        description: "Una charla inspiradora sobre el futuro de la biotecnología.",
+      title:
+        "Conferencia Magistral: “Biologizar el Futuro: tendencias y señales para el futuro de la biotecnología",
+      type: "Ponencia",
+      description:
+        "Una visión estratégica sobre el ecosistema biotecnológico en Latinoamérica y los retos de la próxima generación de líderes científicos",
       speaker: {
         name: "Ing. Daniel Domínguez Gómez",
         role: "CEO de Allbiotech · Director en Fundación iGEM",
-        bio: "El Ing. Daniel Domínguez Gómez es un líder en el campo de la biotecnología con amplia experiencia en innovación y desarrollo de proyectos biotecnológicos a nivel internacional.",
-        photo: "https://example.com/speaker_photo.jpg"
-      }
+        bio: "Líder global en bioeconomía y biología sintética. Daniel encabeza la red de jóvenes talentos más influyente de la región, conectando la academia con la industria para impulsar la transferencia tecnológica a nivel internacional",
+        photo: "/speakers/IngDaniel.jpg",
       },
+    },
     {
       id: "2",
       title: "Biotecnología para comprender y transformar la vida",
-      type: "charla",
-        description: "Una charla inspiradora sobre el futuro de la biotecnología.",
+      type: "BioTalk",
+      description:
+        "Transforma la curiosidad en impacto real. Desde la biología molecular hasta la bioinformática, descubre cómo entender los sistemas biológicos nos permite rediseñar nuestro mundo de manera responsable",
       speaker: {
         name: "Dra. María Cristina González Vázquez",
-        role: "Investigadora en el Instituto de Biotecnología, UNAM",
-        bio: "La Dra. María Cristina González Vázquez es una experta en biotecnología con un enfoque en la investigación y desarrollo de soluciones innovadoras para la industria.",
-        photo: "https://example.com/speaker_photo.jpg"
-        }
+        role: "Investigadora del Centro de Investigación en Ciencias Microbiológicas de la Benemérita Universidad Autónoma de Puebla",
+        bio: "Experta en el estudio de sistemas biológicos con enfoque en la interacción planta-patógeno y bioprocesos. La Dra. González Vázquez integra herramientas de biología molecular y bioinformática para el desarrollo de soluciones sostenibles, promoviendo una visión de la biotecnología como motor de cambio responsable para la ciencia y la sociedad.",
+        photo: "/speakers/DraMaria.jpg",
       },
-      {
+    },
+    {
       id: "3",
       title: "Biotecnología aplicada a la sociedad y el entorno",
-      type: "charla",
-        description: "Una charla inspiradora sobre el futuro de la biotecnología.",
+      type: "BioTalk",
+      description:
+        "¿Puede la ciencia resolver los problemas más urgentes del mundo? Descubre cómo la biotecnología genera soluciones reales para la salud, la alimentación y el medio ambiente.",
       speaker: {
         name: "D.C. Vianney Marín Cevada",
-        role: "Investigadora en el Instituto de Biotecnología, UNAM",
-        bio: "La D.C. Vianney Marín Cevada es una experta en biotecnología con un enfoque en la investigación y desarrollo de soluciones innovadoras para la industria.",
-        photo: "https://example.com/speaker_photo.jpg"
-        }
+        role: "Investigadora en el Centro de Investigaciones en Ciencias Microbiológicas BUAP",
+        bio: "Experta en el desarrollo de soluciones biotecnológicas para los sectores agrícola y ambiental. Con formación posdoctoral en Alemania, la Dra. Marín Cevada se especializa en el uso de microorganismos para la protección del entorno y la generación de innovaciones que impulsan el desarrollo social y la sostenibilidad.",
+        photo: "/speakers/DraVianney.jpg",
       },
+    },
     {
       id: "4",
       title: "Biotecnología, innovación y futuro profesional",
-      type: "charla",
-      description: "Biotecnología, innovación y futuro profesional",
+      type: "BioTalk",
+      description:
+        "¿Qué lugar ocuparás en el mundo de la biotecnología? Descubre cómo conectar tu conocimiento con un propósito claro y explorar las oportunidades que ofrece este campo más allá del laboratorio.",
       speaker: {
         name: "Dr. Eric Reyes Cervantes",
-        role: "Investigador en el Instituto de Biotecnología, UNAM",
-        bio: "El Dr. Eric Reyes Cervantes es un destacado investigador en el campo de la biotecnología con múltiples publicaciones en revistas científicas.",
-        photo: "https://example.com/speaker_photo.jpg"
-      }
+        role: "Jefe de área Proyectos Especiales de DITCo y Manager de FABLAB BUAP.",
+        bio: "Entusiasta de la ciencia y la tecnología, con un enfoque multi e interdisciplinario aplicado a la innovación, fomado como Ingeniero químico, con maestría en Bioquímica y Genética, candidato a doctor en Biotecnología Aplicada, diplomados en metalúrgia, Design Thinking, Innovación y Proyectos. ",
+        photo: "/speakers/DrEric.jpg",
+      },
     },
     {
       id: "5",
       title: "¿Superhéroe o biotecnólogo?",
-      type: "charla",
-      description: "¿Superhéroe o biotecnólogo?",
+      type: "BioTalk",
+      description:
+        "¿Debes salvar al mundo para ser un buen biotecnólogo? Descubre cómo el verdadero impacto de la ciencia no siempre requiere una capa, sino constancia, ética y pequeñas acciones que, desde la investigación y la industria, transforman nuestra realidad cotidiana.",
       speaker: {
-        name: " Dr. Luis Ramiro Caso Vargas",
-        role: "Investigador en el Instituto de Biotecnología, UNAM",
-        bio: "El Dr. Luis Ramiro Caso Vargas es un destacado investigador en el campo de la biotecnología con múltiples publicaciones en revistas científicas.",
-        photo: "https://example.com/speaker_photo.jpg"
+        name: " Dra. Julia María Alatorre Cruz ",
+        role: "Investigadora en el Centro de Investigaciones en Ciencias Microbiológicas de la BUAP",
+        bio: "Experta en microbiología molecular y ecología microbiana, con especial énfasis en la seguridad alimentaria y la sustentabilidad ambiental. La Dra. Alatorre Cruz se especializa en el estudio de microorganismos benéficos, la biorremediación de metales pesados y el análisis de la microbiota intestinal. Su labor científica integra el desarrollo de soluciones biotecnológicas para el sector agrícola con investigaciones sobre la influencia de la dieta y los microorganismos en la salud humana, impulsando innovaciones para la conservación natural y el bienestar social.",
+        photo: "/speakers/DraJulia.jpg",
       },
     },
     {
       id: "6",
       title: "Feria de Innovación Biotecnológica y Vinculación",
-      type: "feria",
-      description: "Explora las últimas innovaciones en biotecnología y conecta con instituciones educativas y empresas del sector.",
+      type: "Convocatoria",
+      description:
+        "Explora el talento de los estudiantes de la Licenciatura en Biotecnología, conoce proyectos de vanguardia y conecta con las dependencias que impulsan tu formación integral y profesional.",
       convocatoria: {
-        fechas: "26 de Marzo, 2026 · 14:00 - 17:00",
-        requirements: [
-          "Exhibición de proyectos estudiantiles",
-          "Módulos informativos universitarios",
-          "Reconocimientos a innovación, impacto social y ambiental"
+        why: [
+          "Descubre: Proyectos reales de salud, medio ambiente y bioeconomía creados por tus compañeros.",
+          "Conecta: Resuelve tus dudas sobre intercambios, servicio social y bolsa de trabajo en un solo lugar.",
+          "Vota: Ayuda a elegir al ganador del Reconocimiento del Público.",
         ],
-        pdfUrl: "/convocatorias/feria-innovacion.pdf"
-      }
+        awards: [
+          "Se otorgarán distintivos en 6 categorías, incluyendo Innovación, Impacto Ambiental y Viabilidad.",
+        ],
+        pdfUrl: "/convocatorias/feria-innovacion.pdf",
+      },
     },
     {
       id: "7",
-      title: "Muro de Arte",
-      type: "concurso",
-      description: "Concurso de expresión artística relacionada con la biotecnología.",
+      title: "Exposición y Concurso de Carteles Científicos",
+      type: "Convocatoria",
+      description:
+        "¿Listo para comunicar tus hallazgos? Presenta tu investigación ante la comunidad, sométela a evaluación académica y demuestra tu rigor metodológico en el foro científico más importante de nuestra licenciatura.",
       convocatoria: {
-        fechas: "Inscripciones hasta el 20 de Marzo, 2026",
-        requirements: [
-          "Obra original relacionada con biotecnología",
-          "Formato libre: pintura, dibujo, arte digital",
-          "Registro previo obligatorio"
+        why: [
+          "Impulsa tu Perfil: Comparte tus resultados de investigación, estancias, servicio social o revisiones bibliográficas.",
+          "Evaluación Profesional: Recibe retroalimentación de la Sociedad Estudiantil de Biotecnología y Bioingeniería BUAP.",
+          "Networking: Genera diálogos académicos con docentes, investigadores y compañeros interesados en tu área.",
         ],
-        pdfUrl: "/convocatorias/muro-de-arte.pdf"
-      }
+        awards: [
+          "Gana Reconocimiento: Compite por el 1er, 2do y 3er lugar y obtén tu constancia oficial de participación.",
+        ],
+        pdfUrl: "/convocatorias/muro-de-arte.pdf",
+      },
     },
     {
       id: "8",
-      title: "Concurso de Carteles",
-      type: "concurso",
-      description: "Presenta tu investigación en formato de cartel científico.",
+      title: "Muro de Arte",
+      type: "Convocatoria",
+      description:
+        "¿Cómo ves la ciencia tú? Convierte tu visión en arte y forma parte de esta exposición colectiva donde la biotecnología y la vida universitaria se encuentran con la creatividad visual. Un espacio de libre expresión diseñado para fortalecer nuestra identidad a través de la fotografía, el dibujo y el diseño.",
       convocatoria: {
-        fechas: "Inscripciones hasta el 20 de Marzo, 2026",
-        requirements: [
-          "Cartel científico con investigación original",
-          "Formato estándar de presentación",
-          "Categorías: estudiantes de licenciatura y posgrado"
+        why: [
+          "Exprésate: Muestra tu talento en fotografía, ilustración, dibujo o collage. ",
+          "Impacta: Tu obra será parte del ambiente visual de todo el evento.",
+          "Sin presión: El Staff se encarga del montaje; tú solo entregas tu obra y disfrutas el evento.",
         ],
-        pdfUrl: "/convocatorias/carteles.pdf"
-      }
+        awards: [
+          "Gana: Los asistentes votarán vía QR por sus 3 obras favoritas para ser premiadas en la clausura.",
+        ],
+        pdfUrl: "/convocatorias/muro-de-arte.pdf",
+      },
     },
+
     {
       id: "9",
       title: "Micro Charlas",
-      type: "charla",
-      description: "Breves presentaciones de proyectos estudiantiles en formato lightning talk.",
+      type: "Ponencia",
+      description:
+        "¿Buscas laboratorio, tesis o servicio social? Conoce de primera mano qué están investigando los doctores de nuestra universidad. En presentaciones de 7 minutos, descubre las oportunidades que existen para integrarte tempranamente al mundo de la ciencia.",
       convocatoria: {
-        fechas: "Inscripciones hasta el 20 de Marzo, 2026",
-        requirements: [
-          "Presentación de 5-10 minutos",
-          "Tema relacionado con biotecnología",
-          "Abierto a estudiantes de todas las carreras"
+        why: [
+          "Vinculación Directa: Conecta con investigadores de la BUAP y conoce sus proyectos actuales.",
+          "Exploración de Intereses: Identifica áreas de aplicación que te apasionen para tu futura titulación o estancias.",
+          "Interacción Real: Espacio de preguntas y respuestas para resolver tus dudas sobre el trabajo en laboratorio",
         ],
-        pdfUrl: "/convocatorias/micro-charlas.pdf"
-      }
-    }
-  ]
-        
+        pdfUrl: "/convocatorias/micro-charlas.pdf",
+      },
+    },
+  ];
+
   const [selectedType, setSelectedType] = useState<"all" | ActivityType>("all");
   const [activeActivity, setActiveActivity] = useState<Activity | null>(null);
 
   const filteredActivities = activities.filter(
-    a => selectedType === "all" || a.type === selectedType
+    (a) => selectedType === "all" || a.type === selectedType,
   );
 
   return (
     <section id="actividades" className="py-20 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
         {/* HEADER */}
         <div className="text-center mb-16">
           <h2 className="text-gray-900 mb-4">Actividades y Charlas</h2>
@@ -179,7 +194,7 @@ export function Actividades() {
 
         {/* GRID */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredActivities.map(activity => (
+          {filteredActivities.map((activity) => (
             <Card key={activity.id} className="border-gray-200">
               <CardContent className="p-6">
                 <Badge>{activity.type}</Badge>
@@ -194,10 +209,9 @@ export function Actividades() {
                     setActiveActivity(activity);
                   }}
                 >
-                  {activity.type === "concurso"
+                  {activity.type === "Convocatoria"
                     ? "Ver convocatoria"
                     : "Ver detalles"}
-                  
                 </Button>
               </CardContent>
             </Card>

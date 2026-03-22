@@ -8,13 +8,13 @@ const scheduleData = {
     {
       time: "08:30 - 09:00",
       title: "Registro de Asistentes",
-      location: "Área de Registro",
+      location: "Unidad de Seminarios",
       type: "registro"
     },
     {
       time: "09:00 - 09:30",
       title: "Ceremonia de Inauguración",
-      location: "Auditorio Principal",
+      location: "Unidad de seminarios",
       type: "inauguracion"
     },
     {
@@ -22,31 +22,38 @@ const scheduleData = {
       title: "Conferencia Magistral",
       speaker:
         "Ing. Daniel Domínguez Gómez · CEO de Allbiotech · Director en Fundación iGEM",
-      location: "Auditorio Principal",
+      location: "Unidad de seminarios",
       type: "keynote"
     },
     {
-      time: "11:00 - 12:30",
-      title: "Ciclo de Charlas tipo TED",
+      time: "10:45 - 12:30",
+      title: "BioTalks",
       speaker: [
         "“Biotecnología para comprender y transformar la vida” · Dra. María Cristina González Vázquez",
         "“Biotecnología aplicada a la sociedad y el entorno” · D.C. Vianney Marín Cevada",
         "“Biotecnología, innovación y futuro profesional” · Dr. Eric Reyes Cervantes",
         "“¿Superhéroe o biotecnólogo?” · Dr. Luis Ramiro Caso Vargas"
       ],
-      location: "Auditorio Principal",
+      location: "Unidad de seminarios",
       type: "talks"
     },
     {
-      time: "14:00 - 17:00",
+      time: "12:30 - 13:30",
+      title: "Receso",
+      location: "Unidad de seminarios",
+      type: "break"
+    },
+    {
+      time: "13:40 - 16:30",
       title: "Feria de Innovación Biotecnológica y Vinculación",
-      speaker: [
-        "Exhibición de proyectos estudiantiles",
-        "Módulos informativos universitarios",
-        "Reconocimientos a innovación, impacto social y ambiental"
-      ],
-      location: "Área de Exposición",
+      location: "Explanada Unidad de seminarios",
       type: "fair"
+    },
+    {
+      time: "16:30 - 17:00",
+      title: "Cierre del primer día",
+      location: "Unidad de seminarios",
+      type: "closing"
     }
   ],
 
@@ -54,37 +61,38 @@ const scheduleData = {
     {
       time: "09:00 - 11:00",
       title: "Concurso de Carteles Científicos",
-      speaker: [
-        "Presentación de proyectos de investigación o revisiones",
-        "Evaluación por la Sociedad Estudiantil de Biotecnología y Bioingeniería BUAP",
-        "Premiación: 1er, 2do y 3er lugar"
-      ],
-      location: "Área Académica",
+      location: "Explanada Unidad de seminarios",
       type: "contest"
     },
     {
-      time: "11:30 - 12:30",
+      time: "11:00 - 11:30",
+      title: "Receso",
+      location: "Unidad de seminarios",
+      type: "break"
+    },
+    {
+      time: "11:30 - 13:00",
       title: "Micro Charlas: Líneas de Investigación",
       speaker:
         "Charlas breves (5–7 min) de investigadores sobre sus laboratorios y oportunidades para estudiantes",
-      location: "Auditorio Secundario",
+      location: "Unidad de seminarios",
       type: "talks"
     },
     {
-      time: "12:30 - 14:00",
+      time: "13:15 - 14:30",
       title: "Panel: Rutas profesionales en biotecnología",
       speaker: [
         "Posgrado / Investigación · Mtro. Agustín Martínez Reyes (Egresado BUAP)",
         "Industria · Nutravia",
         "Emprendimiento / Divulgación · Ana Paula Acevedo Negrete (GRIDX Scientific Explorer México)"
       ],
-      location: "Auditorio Principal",
+      location: "Unidad de seminarios",
       type: "panel"
     },
     {
-      time: "15:00 - 16:00",
+      time: "14:30 - 15:00",
       title: "Clausura y Premiación",
-      location: "Auditorio Principal",
+      location: "Unidad de seminarios",
       type: "closing"
     }
   ]
