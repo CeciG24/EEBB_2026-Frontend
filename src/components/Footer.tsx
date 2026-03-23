@@ -30,8 +30,8 @@ export function Footer() {
               </span>
             </div>
             <p className="text-gray-400">
-              Avanzando en la investigación biotecnológica a través de la
-              colaboración y la innovación.
+              Impulsando el desarrollo de la Biotecnología en México a través de
+              la colaboración y el talento estudiantil
             </p>
           </div>
 
@@ -106,8 +106,8 @@ export function Footer() {
 
         <div className="border-t border-gray-800 pt-8 text-center text-gray-400">
           <p>
-            &copy; {new Date().getFullYear()} bioconecta. Todos los derechos
-            reservados.
+            &copy; {new Date().getFullYear()} Encuentro Estudiantil de
+            Biotecnología BUAP. Todos los derechos reservados.
           </p>
         </div>
       </div>
