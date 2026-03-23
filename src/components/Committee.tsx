@@ -20,7 +20,7 @@ const comite = [
     name: "Yolanda Mirón López ",
     role: "Tesorera del Comité Organizador",
     description:
-      "Estudiante de Biotecnología con formación en el área médica, con especialización en el estudio de la microbiota intestinal y su impacto en el sistema endocrino. Actualmente enfocada en la investigación de patologías hormonales complejas, como el SOP y la endometriosis, analizando Estudiante de Biotecnología interesada en el diagnóstico molecular, el desarrollo de soluciones biomédicas sostenibles y la divulgación científica, con participación en la publicación de un artículo sobre un biosensor para la detección de lactato en saliva.el papel de la nutrición funcional en la regulación metabólica e inmunológica.",
+      "Estudiante de Biotecnología interesada en el diagnóstico molecular, el desarrollo de soluciones biomédicas sostenibles y la divulgación científica, con participación en la publicación de un artículo sobre un biosensor para la detección de lactato en saliva.el papel de la nutrición funcional en la regulación metabólica e inmunológica.",
   },
   {
     photo: "/comite/Maria.jpg",

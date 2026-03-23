@@ -58,7 +58,8 @@ export function PagoDatos() {
           </h2>
           <p className="text-gray-600 text-lg max-w-2xl mx-auto">
             Los pagos se realizarán a la cuenta de la Facultad de Ciencias
-            Biológicas.
+            Biológicas. Favor de conservar su boucher en original porque se
+            recibirán durante el registro del primer día
           </p>
         </div>
 

@@ -50,7 +50,7 @@ export function Donde() {
                   <div>
                     <h3 className="text-gray-900 mb-2" style={{ fontFamily: 'Josefin Sans, sans-serif' }}>Fechas</h3>
                     <p className="text-gray-600">
-                      26 - 27 de Marzo, 2026<br />
+                      16 - 17 de Abril, 2026<br />
                       2 días de conferencias, actividades y networking
                     </p>
                   </div>
