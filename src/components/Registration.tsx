@@ -84,9 +84,9 @@ export function Registration() {
 
               <ul className="space-y-3 mb-8">
                 {[
-                  "Conferencias magistrales",
-                  "Ponencias temáticas",
-                  "Mesas redondas con egresados",
+                  "Acceso completo a todas las actividades del evento",
+                  "Kit de bienvenida y gafete oficial.",
+                  "Constancia oficial de asistencia al evento.",
                 ].map((feature, index) => (
                   <li key={index} className="flex items-start gap-3">
                     <Check
@@ -98,7 +98,11 @@ export function Registration() {
                 ))}
               </ul>
 
-              <Button variant="outline" className="w-full" onClick={handleRegister}>
+              <Button
+                variant="outline"
+                className="w-full"
+                onClick={handleRegister}
+              >
                 Inscribirse Ahora
               </Button>
             </CardContent>
@@ -133,7 +137,9 @@ export function Registration() {
 
               <ul className="space-y-3 mb-8">
                 {[
-                  "Participación en una convocatoria (cartel científico, feria de innovación o taller)",
+                  "Gafete distintivo",
+                  "Participación en una convocatoria a elegir (cartel científico, feria de innovación o taller)",
+                  "Constancia de participación en la actividad académica elegida",
                 ].map((feature, index) => (
                   <li key={index} className="flex items-start gap-3">
                     <Check
@@ -145,7 +151,10 @@ export function Registration() {
                 ))}
               </ul>
 
-              <Button className="w-full bg-[#002fbb] hover:bg-[#001f8f]" onClick={handleRegister}>
+              <Button
+                className="w-full bg-[#002fbb] hover:bg-[#001f8f]"
+                onClick={handleRegister}
+              >
                 Inscribirse Ahora
               </Button>
             </CardContent>
@@ -173,7 +182,10 @@ export function Registration() {
               <ul className="space-y-3 mb-8">
                 {[
                   "Acceso completo al evento",
-                  "Participación en todas las convocatorias",
+                  "Kit de bienvenida y gafete distintivo.",
+                  "Acceso total y Participación en todas las convocatorias",
+                  "Constancia oficial de asistencia al evento.",
+                  "Constancias de participación por cada convocatoria realizada.",
                   "Constancia con mención especial como Participante Integral EEBB 2026",
                 ].map((feature, index) => (
                   <li key={index} className="flex items-start gap-3">
@@ -186,7 +198,11 @@ export function Registration() {
                 ))}
               </ul>
 
-              <Button variant="outline" className="w-full" onClick={handleRegister}>
+              <Button
+                variant="outline"
+                className="w-full"
+                onClick={handleRegister}
+              >
                 Inscribirse Ahora
               </Button>
             </CardContent>

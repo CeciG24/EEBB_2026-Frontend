@@ -103,7 +103,7 @@ export function Premios() {
           </div>
           <div className="mt-8 text-center">
             <p className="text-gray-600">
-              Los ganadores serán anunciados durante la ceremonia de clausura el 27 de marzo.
+              Los ganadores serán anunciados durante la ceremonia de clausura el 17 de abril.
             </p>
           </div>
         </div>

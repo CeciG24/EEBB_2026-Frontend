@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
 
-type ActivityType = "charla" | "concurso" | "panel" | "feria";
+type ActivityType = "BioTalk" | "Convocatoria" | "Panel" | "Ponencia";
 
 interface Activity {
   id: string;
@@ -16,10 +16,10 @@ interface Activity {
     photo?: string;
   };
   convocatoria?: {
-    requirements: string[];
-    fechas: string;
     registroUrl?: string;
     pdfUrl?: string;
+    why?: string[];
+    awards?: string[];
   };
 }
 
@@ -29,10 +29,10 @@ interface Props {
 }
 
 const typeLabels: Record<ActivityType, string> = {
-  charla: "Charla",
-  concurso: "Concurso",
-  panel: "Panel",
-  feria: "Feria",
+  BioTalk: "BioTalk",
+  Convocatoria: "Convocatoria",
+  Panel: "Panel",
+  Ponencia: "Ponencia",
 };
 
 export function ActivityModal({ activity, onClose }: Props) {
@@ -106,7 +106,10 @@ export function ActivityModal({ activity, onClose }: Props) {
           </Badge>
           <h2
             className="text-gray-900"
-            style={{ fontFamily: "Josefin Sans, sans-serif", marginBottom: "0.5rem" }}
+            style={{
+              fontFamily: "Josefin Sans, sans-serif",
+              marginBottom: "0.5rem",
+            }}
           >
             {activity.title}
           </h2>
@@ -153,7 +156,13 @@ export function ActivityModal({ activity, onClose }: Props) {
               >
                 {activity.speaker.name}
               </h4>
-              <p style={{ color: "#002fbb", marginBottom: "0.5rem", fontSize: "0.9rem" }}>
+              <p
+                style={{
+                  color: "#002fbb",
+                  marginBottom: "0.5rem",
+                  fontSize: "0.9rem",
+                }}
+              >
                 {activity.speaker.role}
               </p>
               <p style={{ color: "#4b5563", fontSize: "0.875rem" }}>
@@ -172,30 +181,73 @@ export function ActivityModal({ activity, onClose }: Props) {
               marginTop: "1rem",
             }}
           >
-            <h4
+            {/* ¿Por qué asistir? */}
+            {activity.convocatoria.why &&
+              activity.convocatoria.why.length > 0 && (
+                <div style={{ marginBottom: "1.5rem" }}>
+                  <h4
+                    style={{
+                      fontFamily: "Josefin Sans, sans-serif",
+                      fontWeight: 600,
+                      marginBottom: "0.75rem",
+                      color: "#111827",
+                    }}
+                  >
+                    ¿Por qué asistir?
+                  </h4>
+                  <ul style={{ paddingLeft: "1.25rem", color: "#4b5563" }}>
+                    {activity.convocatoria.why.map((reason, i) => (
+                      <li
+                        key={i}
+                        style={{
+                          marginBottom: "0.5rem",
+                          listStyleType: "disc",
+                        }}
+                      >
+                        {reason}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+            {/* Premios a la Excelencia */}
+            {activity.convocatoria.awards &&
+              activity.convocatoria.awards.length > 0 && (
+                <div style={{ marginBottom: "1.5rem" }}>
+                  <h4
+                    style={{
+                      fontFamily: "Josefin Sans, sans-serif",
+                      fontWeight: 600,
+                      marginBottom: "0.75rem",
+                      color: "#111827",
+                    }}
+                  >
+                    Premios a la Excelencia
+                  </h4>
+                  <ul style={{ paddingLeft: "1.25rem", color: "#4b5563" }}>
+                    {activity.convocatoria.awards.map((award, i) => (
+                      <li
+                        key={i}
+                        style={{
+                          marginBottom: "0.5rem",
+                          listStyleType: "disc",
+                        }}
+                      >
+                        {award}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+            <div
               style={{
-                fontFamily: "Josefin Sans, sans-serif",
-                fontWeight: 600,
-                marginBottom: "0.75rem",
-                color: "#111827",
+                display: "flex",
+                flexDirection: "column",
+                gap: "0.75rem",
               }}
             >
-              Convocatoria
-            </h4>
-
-            <ul style={{ paddingLeft: "1.25rem", marginBottom: "1rem", color: "#4b5563" }}>
-              {activity.convocatoria.requirements.map((req, i) => (
-                <li key={i} style={{ marginBottom: "0.25rem", listStyleType: "disc" }}>
-                  {req}
-                </li>
-              ))}
-            </ul>
-
-            <p style={{ fontSize: "0.875rem", color: "#6b7280", marginBottom: "1rem" }}>
-              <strong>Fechas:</strong> {activity.convocatoria.fechas}
-            </p>
-
-            <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
               {activity.convocatoria.pdfUrl && (
                 <Button asChild variant="outline" className="w-full">
                   <a
@@ -211,7 +263,11 @@ export function ActivityModal({ activity, onClose }: Props) {
               {activity.convocatoria.registroUrl && (
                 <Button
                   asChild
-                  style={{ backgroundColor: "#002fbb", color: "#fff", width: "100%" }}
+                  style={{
+                    backgroundColor: "#002fbb",
+                    color: "#fff",
+                    width: "100%",
+                  }}
                 >
                   <a
                     href={activity.convocatoria.registroUrl}

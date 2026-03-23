@@ -10,6 +10,7 @@ import { FAQ } from "../components/FAQ";
 import { Contacto } from "../components/Contacto";
 import { Footer } from "../components/Footer";
 import { Actividades } from "../components/Activities";
+import { Committee } from "../components/Committee";
 
 export default function Home() {
   return (
@@ -24,6 +25,7 @@ export default function Home() {
         <Schedule />
         <Premios />
         <Registration />
+        <Committee />
         <FAQ />
         <Contacto />
       </main>
