@@ -7,6 +7,11 @@ import {
   XCircle, Clock, LogOut, Check,
 } from "lucide-react";
 
+const rawApi = (import.meta.env.VITE_API_URL || "http://localhost:8000/api").trim();
+const withProtocol = /^https?:\/\//i.test(rawApi) ? rawApi : `https://${rawApi}`;
+const baseApi = withProtocol.replace(/\/$/, "");
+const API = /\/api$/i.test(baseApi) ? baseApi : `${baseApi}/api`;
+
 // ── Tipos ──────────────────────────────────────────────────
 interface Inscripcion {
   id: number;
@@ -137,6 +142,19 @@ export default function Dashboard() {
     const file = e.target.files?.[0];
     if (!file) return;
 
+    const allowedTypes = ["application/pdf", "image/jpeg", "image/png"];
+    const maxSizeBytes = 5 * 1024 * 1024; // 5 MB
+
+    if (!allowedTypes.includes(file.type)) {
+      setUploadError("Formato no permitido. Usa PDF, JPG o PNG.");
+      return;
+    }
+
+    if (file.size > maxSizeBytes) {
+      setUploadError("El archivo excede 5 MB.");
+      return;
+    }
+
     setUploading(true);
     setUploadError(null);
     setUploadSuccess(false);
@@ -146,13 +164,22 @@ export default function Dashboard() {
 
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch("http://localhost:8000/api/mi-inscripcion", {
+      const res = await fetch(`${API}/mi-inscripcion`, {
         method:  "POST",
         headers: { Authorization: `Bearer ${token}`, Accept: "application/json" },
         body:    form,
       });
-      const data = await res.json();
-      if (!res.ok) { setUploadError(data.message || "Error al subir el archivo"); return; }
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        const backendFieldError = data?.errors?.ruta_comprobante?.[0];
+        setUploadError(
+          data?.error ||
+          data?.message ||
+          backendFieldError ||
+          "Error al subir el archivo"
+        );
+        return;
+      }
       setInscripcion(data.inscripcion);
       setUploadSuccess(true);
       setTimeout(() => setUploadSuccess(false), 4000);
@@ -181,7 +208,7 @@ export default function Dashboard() {
 
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch("http://localhost:8000/api/trabajos", {
+      const res = await fetch(`${API}/trabajos`, {
         method:  "POST",
         headers: { Authorization: `Bearer ${token}`, Accept: "application/json" },
         body:    form,

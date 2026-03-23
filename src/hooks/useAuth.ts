@@ -38,7 +38,10 @@ export function useAuth() {
   const [user, setUser]       = useState<AuthUser | null>(null);
   const [loading, setLoading] = useState(true); // true al inicio para verificar sesión
 
-  const API = "http://localhost:8000/api";
+  const rawApi = (import.meta.env.VITE_API_URL || "http://localhost:8000/api").trim();
+  const withProtocol = /^https?:\/\//i.test(rawApi) ? rawApi : `https://${rawApi}`;
+  const baseApi = withProtocol.replace(/\/$/, "");
+  const API = /\/api$/i.test(baseApi) ? baseApi : `${baseApi}/api`;
 
   // ── Leer usuario guardado al montar ──────────────────────
   useEffect(() => {
