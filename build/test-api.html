@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Register API</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+        body { font-family: monospace; padding: 20px; }
+        input { display: block; width: 300px; padding: 5px; margin: 5px 0; }
+        button { padding: 10px 20px; cursor: pointer; }
+        pre { background: #f0f0f0; padding: 15px; border-radius: 5px; max-height: 400px; overflow-y: auto; }
+        .error { color: red; }
+        .success { color: green; }
+    </style>
+</head>
+<body>
+    <h1>Test API Register</h1>
+    <button onclick="testRegister()">Probar Registro</button>
+    <button onclick="clearLog()">Limpiar</button>
+    
+    <h2>Log:</h2>
+    <pre id="output"></pre>
+
+    <script>
+        const log = (msg, isError = false, isSuccess = false) => {
+            const el = document.getElementById('output');
+            const line = document.createElement('div');
+
+            if (isError || isSuccess) {
+                const icon = document.createElement('i');
+                icon.className = isError ? 'fa-solid fa-circle-xmark' : 'fa-solid fa-circle-check';
+                icon.style.marginRight = '6px';
+                line.appendChild(icon);
+            }
+
+            const text = document.createElement('span');
+            text.textContent = msg;
+            line.appendChild(text);
+
+            if (isError) line.className = 'error';
+            if (isSuccess) line.className = 'success';
+
+            el.appendChild(line);
+            el.scrollTop = el.scrollHeight;
+        };
+        
+        const clearLog = () => document.getElementById('output').innerHTML = '';
+
+        const testRegister = async () => {
+            clearLog();
+            log('Iniciando test...');
+            
+            const data = {
+                name: 'Test ' + Date.now(),
+                email: 'test' + Date.now() + '@example.com',
+                password: 'password123',
+                password_confirmation: 'password123',
+                institucion: 'BUAP',
+                nivel: 'universidad',
+                licenciatura: 'Biotecnología',
+                semestre: '6',
+                tipo_inscripcion: 'asistente'
+            };
+            
+            log('Datos enviados: ' + JSON.stringify(data, null, 2));
+            
+            try {
+                log('Enviando solicitud POST...');
+                const response = await fetch('http://localhost:8000/api/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                log(`Status: ${response.status} ${response.statusText}`);
+                const json = await response.json();
+                log('Response: ' + JSON.stringify(json, null, 2));
+                
+                if (response.ok) {
+                    log('Registro exitoso!', false, true);
+                } else {
+                    log('Error en la respuesta', true);
+                }
+            } catch (error) {
+                log('Error de conexión: ' + error.message, true);
+            }
+        };
+    </script>
+</body>
+</html>

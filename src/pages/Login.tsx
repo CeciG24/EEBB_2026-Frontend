@@ -6,6 +6,7 @@ import { Label } from "../components/ui/label";
 import { Input } from "../components/ui/input";
 import { Button } from "../components/ui/button";
 import { translateError } from "../utils/errorTranslations";
+import { Link } from "react-router-dom";
 
 export default function Login() {
   const { login } = useAuth();
@@ -89,9 +90,9 @@ export default function Login() {
 
           <p className="text-center text-gray-600 text-sm">
             ¿No tienes cuenta?{" "}
-            <a href="/register" className="text-[#002fbb] hover:underline">
+            <Link to="/register" className="text-[#002fbb] hover:underline">
               Regístrate aquí
-            </a>
+            </Link>
           </p>
         </form>
       </main>
