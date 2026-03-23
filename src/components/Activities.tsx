@@ -4,7 +4,7 @@ import { Card, CardContent } from "./ui/card";
 import { Button } from "./ui/button";
 import { ActivityModal } from "./modals/ActivityModal";
 
-export type ActivityType = "BioTalk" | "Convocatoria" | "Panel" | "Ponencia";
+export type ActivityType = "BioTalk" | "Convocatoria" | "Panel" | "Ponencia"|"Actividad";
 
 export interface Activity {
   id: string;
@@ -12,13 +12,20 @@ export interface Activity {
   type: ActivityType;
   description: string;
 
-  // opcional según tipo
   speaker?: {
+    // singular — para actividades con 1 speaker
     name: string;
     role: string;
     bio: string;
     photo?: string;
   };
+  speakers?: Array<{
+    // plural — para paneles con varios
+    name: string;
+    role: string;
+    bio: string;
+    photo?: string;
+  }>;
 
   convocatoria?: {
     registroUrl?: string;
@@ -111,7 +118,7 @@ export function Actividades() {
         awards: [
           "Se otorgarán distintivos en 6 categorías, incluyendo Innovación, Impacto Ambiental y Viabilidad.",
         ],
-        pdfUrl: "/convocatorias/feria-innovacion.pdf",
+        pdfUrl: "/convocatorias/feria-de-innovacion.pdf",
       },
     },
     {
@@ -129,7 +136,7 @@ export function Actividades() {
         awards: [
           "Gana Reconocimiento: Compite por el 1er, 2do y 3er lugar y obtén tu constancia oficial de participación.",
         ],
-        pdfUrl: "/convocatorias/muro-de-arte.pdf",
+        pdfUrl: "/convocatorias/carteles.pdf",
       },
     },
     {
@@ -163,8 +170,55 @@ export function Actividades() {
           "Exploración de Intereses: Identifica áreas de aplicación que te apasionen para tu futura titulación o estancias.",
           "Interacción Real: Espacio de preguntas y respuestas para resolver tus dudas sobre el trabajo en laboratorio",
         ],
-        pdfUrl: "/convocatorias/micro-charlas.pdf",
+        pdfUrl: "/convocatorias/microcharlas.pdf",
       },
+    },
+    // Actividad 10 actualizada
+    {
+      id: "10",
+      title: "Panel: Rutas Profesionales en Biotecnología",
+      type: "Ponencia",
+      description:
+        "¿Qué sigue después de la licenciatura? Escucha a egresadas que están transformando el sector en la industria, el emprendimiento y la investigación de alto nivel...",
+      speakers: [
+        {
+          name: "Victoria Conde Ávila",
+          role: "Co-fundadora de la Start-up MicroIn · LBT",
+          bio: "",
+          photo: "/speakers/DraVictoria.jpg",
+        },
+        {
+          name: "Ana Paula Acevedo Negrete",
+          role: "GRIDX Scientific Explorer México · IBT",
+          bio: "",
+          photo: "/speakers/DraAnaPaula.jpg",
+        },
+        {
+          name: "Elaine Belén Nolasco Díaz",
+          role: "Investigación, Innovación y desarrollo en la industria de alimentos y nuevos compuestos para la salud",
+          bio: "",
+          photo: "/speakers/DraElaine.jpg",
+        },
+        {
+          name: "M.C Alejandra Paulina Pérez González",
+          role: "Candidata a Doctora en Ciencias Biomédicas · UNAM",
+          bio: "",
+          photo: "/speakers/DraAlejandra.jpg",
+        },
+        {
+          name: "M.C Agustín Reyes Martínez",
+          role: "Investigador en sector privado de Microbiología y Biotecnología Industrial",
+          bio: "",
+          photo: "/speakers/MCAgustin.jpg",
+        },
+      ],
+    },
+    {
+      id: "11",
+      title: "Cápsula del Tiempo: Carta al futuro biotecnólogo que seré",
+      type: "Actividad",
+      description:
+        "¿Dónde te ves en cinco años? Detén el tiempo por un momento y escribe tus metas, miedos y aspiraciones. Esta carta es un compromiso contigo mismo que viajará por el tiempo hasta encontrarte convertido en un profesional. (La logística será detallada durante el evento)",
     },
   ];
 

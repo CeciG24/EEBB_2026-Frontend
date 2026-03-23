@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
 
-type ActivityType = "BioTalk" | "Convocatoria" | "Panel" | "Ponencia";
+type ActivityType = "BioTalk" | "Convocatoria" | "Panel" | "Ponencia"|"Actividad";
 
 interface Activity {
   id: string;
@@ -10,11 +10,19 @@ interface Activity {
   type: ActivityType;
   description: string;
   speaker?: {
+    // singular — para actividades con 1 speaker
     name: string;
     role: string;
     bio: string;
     photo?: string;
   };
+  speakers?: Array<{
+    // plural — para paneles con varios
+    name: string;
+    role: string;
+    bio: string;
+    photo?: string;
+  }>;
   convocatoria?: {
     registroUrl?: string;
     pdfUrl?: string;
@@ -33,6 +41,7 @@ const typeLabels: Record<ActivityType, string> = {
   Convocatoria: "Convocatoria",
   Panel: "Panel",
   Ponencia: "Ponencia",
+  Actividad: "Actividad",
 };
 
 export function ActivityModal({ activity, onClose }: Props) {
@@ -171,7 +180,43 @@ export function ActivityModal({ activity, onClose }: Props) {
             </div>
           </div>
         )}
-
+        
+        {/* PANEL — múltiples speakers */}
+{activity.speakers && activity.speakers.length > 0 && (
+  <div style={{ borderTop: "1px solid #e5e7eb", paddingTop: "1.5rem", marginTop: "1rem" }}>
+    <h4 style={{ fontFamily: "Josefin Sans, sans-serif", fontWeight: 600, marginBottom: "1rem", color: "#111827" }}>
+      Panelistas
+    </h4>
+    <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
+      {activity.speakers.map((s, i) => (
+        <div key={i} style={{ display: "flex", gap: "0.75rem", alignItems: "flex-start" }}>
+          {s.photo ? (
+            <img
+              src={s.photo}
+              alt={s.name}
+              onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
+              style={{ width: "3rem", height: "3rem", borderRadius: "9999px", objectFit: "cover", flexShrink: 0, backgroundColor: "#e5e7eb" }}
+            />
+          ) : (
+            // Placeholder con inicial si no hay foto
+            <div style={{ width: "3rem", height: "3rem", borderRadius: "9999px", backgroundColor: "#002fbb22", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+              <span style={{ color: "#002fbb", fontWeight: 700, fontSize: "1rem" }}>
+                {s.name.trim()[0]}
+              </span>
+            </div>
+          )}
+          <div>
+            <p style={{ fontWeight: 600, color: "#111827", marginBottom: "0.125rem", fontSize: "0.9rem" }}>
+              {s.name}
+            </p>
+            <p style={{ color: "#002fbb", fontSize: "0.8rem" }}>{s.role}</p>
+            {s.bio && <p style={{ color: "#4b5563", fontSize: "0.8rem", marginTop: "0.25rem" }}>{s.bio}</p>}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+)}
         {/* CONCURSOS / FERIA — convocatoria */}
         {activity.convocatoria && (
           <div
