@@ -4,10 +4,10 @@ import { useState } from "react";
 const datos = [
   { label: "Titular", value: "BUAP EC BIOLOGIA" },
   { label: "Número de cuenta", value: "4057087025" },
-  { label: "CLABE interbancaria", value: "021650040570670256" },
-  { label: "Número de cliente", value: "11689489" },
+  { label: "CLABE interbancaria", value: "021650040570870256" },
+  { label: "Número de cliente", value: "11689469" },
   { label: "RFC", value: "UAP370423PP3" },
-  { label: "Banco", value: "Banamex" },
+  { label: "Banco", value: "HSBC" },
 ];
 
 function CopyField({ label, value }: { label: string; value: string }) {

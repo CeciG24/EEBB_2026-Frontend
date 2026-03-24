@@ -188,13 +188,13 @@ export function Actividades() {
           photo: "/speakers/DraVictoria.jpg",
         },
         {
-          name: "Dra. Ana Paula Acevedo Negrete",
+          name: "LBT. Ana Paula Acevedo Negrete",
           role: "GRIDX Scientific Explorer México · IBT",
           bio: "",
           photo: "/speakers/DraAnaPaula.jpg",
         },
         {
-          name: "Dra. Elaine Belén Nolasco Díaz",
+          name: "IBT. Elaine Belén Nolasco Díaz",
           role: "Investigación, Innovación y desarrollo en la industria de alimentos y nuevos compuestos para la salud",
           bio: "",
           photo: "/speakers/DraElaine.jpg",
@@ -206,8 +206,8 @@ export function Actividades() {
           photo: "/speakers/DraAlejandra.jpg",
         },
         {
-          name: "M.C Agustín Reyes Martínez",
-          role: "Investigador en sector privado de Microbiología y Biotecnología Industrial",
+          name: "M.C Agustín Martínez Reyes",
+          role: "Investigador en Microbiología y Biotecnología Industrial ​Especialista en técnicas moleculares y desarrollo de procesos para la industria alimentaria. ​ Con formación en biotecnología productiva, se enfoca en la innovación tecnológica y la optimización de procesos industriales. ​",
           bio: "",
           photo: "/speakers/MCAgustin.jpg",
         },
