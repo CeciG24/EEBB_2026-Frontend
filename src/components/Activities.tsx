@@ -182,19 +182,19 @@ export function Actividades() {
         "¿Qué sigue después de la licenciatura? Escucha a egresadas que están transformando el sector en la industria, el emprendimiento y la investigación de alto nivel...",
       speakers: [
         {
-          name: "Victoria Conde Ávila",
+          name: "Dra. Victoria Conde Ávila",
           role: "Co-fundadora de la Start-up MicroIn · LBT",
           bio: "",
           photo: "/speakers/DraVictoria.jpg",
         },
         {
-          name: "Ana Paula Acevedo Negrete",
+          name: "Dra. Ana Paula Acevedo Negrete",
           role: "GRIDX Scientific Explorer México · IBT",
           bio: "",
           photo: "/speakers/DraAnaPaula.jpg",
         },
         {
-          name: "Elaine Belén Nolasco Díaz",
+          name: "Dra. Elaine Belén Nolasco Díaz",
           role: "Investigación, Innovación y desarrollo en la industria de alimentos y nuevos compuestos para la salud",
           bio: "",
           photo: "/speakers/DraElaine.jpg",
