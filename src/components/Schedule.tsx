@@ -9,13 +9,13 @@ const scheduleData = {
       time: "08:30 - 09:00",
       title: "Registro de Asistentes",
       location: "Unidad de Seminarios",
-      type: "registro"
+      type: "registro",
     },
     {
       time: "09:00 - 09:30",
       title: "Ceremonia de Inauguración",
       location: "Unidad de seminarios",
-      type: "inauguracion"
+      type: "inauguracion",
     },
     {
       time: "09:30 - 10:30",
@@ -23,7 +23,7 @@ const scheduleData = {
       speaker:
         "Ing. Daniel Domínguez Gómez · CEO de Allbiotech · Director en Fundación iGEM",
       location: "Unidad de seminarios",
-      type: "keynote"
+      type: "keynote",
     },
     {
       time: "10:45 - 12:30",
@@ -32,29 +32,29 @@ const scheduleData = {
         "“Biotecnología para comprender y transformar la vida” · Dra. María Cristina González Vázquez",
         "“Biotecnología aplicada a la sociedad y el entorno” · D.C. Vianney Marín Cevada",
         "“Biotecnología, innovación y futuro profesional” · Dr. Eric Reyes Cervantes",
-        "“¿Superhéroe o biotecnólogo?” · Dr. Luis Ramiro Caso Vargas"
+        "“¿Superhéroe o biotecnólogo?” · Dra. Julia María Alatorre Cruz",
       ],
       location: "Unidad de seminarios",
-      type: "talks"
+      type: "talks",
     },
     {
       time: "12:30 - 13:30",
       title: "Receso",
       location: "Unidad de seminarios",
-      type: "break"
+      type: "break",
     },
     {
       time: "13:40 - 16:30",
       title: "Feria de Innovación Biotecnológica y Vinculación",
       location: "Explanada Unidad de seminarios",
-      type: "fair"
+      type: "fair",
     },
     {
       time: "16:30 - 17:00",
       title: "Cierre del primer día",
       location: "Unidad de seminarios",
-      type: "closing"
-    }
+      type: "closing",
+    },
   ],
 
   day2: [
@@ -62,13 +62,13 @@ const scheduleData = {
       time: "09:00 - 11:00",
       title: "Concurso de Carteles Científicos",
       location: "Explanada Unidad de seminarios",
-      type: "contest"
+      type: "contest",
     },
     {
       time: "11:00 - 11:30",
       title: "Receso",
       location: "Unidad de seminarios",
-      type: "break"
+      type: "break",
     },
     {
       time: "11:30 - 13:00",
@@ -76,7 +76,7 @@ const scheduleData = {
       speaker:
         "Charlas breves (5–7 min) de investigadores sobre sus laboratorios y oportunidades para estudiantes",
       location: "Unidad de seminarios",
-      type: "talks"
+      type: "talks",
     },
     {
       time: "13:15 - 14:30",
@@ -84,18 +84,18 @@ const scheduleData = {
       speaker: [
         "Posgrado / Investigación · Mtro. Agustín Martínez Reyes (Egresado BUAP)",
         "Industria · Nutravia",
-        "Emprendimiento / Divulgación · Ana Paula Acevedo Negrete (GRIDX Scientific Explorer México)"
+        "Emprendimiento / Divulgación · Ana Paula Acevedo Negrete (GRIDX Scientific Explorer México)",
       ],
       location: "Unidad de seminarios",
-      type: "panel"
+      type: "panel",
     },
     {
       time: "14:30 - 15:00",
       title: "Clausura y Premiación",
       location: "Unidad de seminarios",
-      type: "closing"
-    }
-  ]
+      type: "closing",
+    },
+  ],
 };
 
 const getBadgeConfig = (type: string) => {
