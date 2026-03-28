@@ -1055,6 +1055,7 @@ export default function Dashboard() {
                           <option value="">Selecciona</option>
                           <option value="preparatoria">Preparatoria</option>
                           <option value="universidad">Universidad</option>
+                          <option value="posgrado">Posgrado</option>
                         </select>
                       </div>
                       <div>
