@@ -226,6 +226,21 @@ export default function Dashboard() {
   const [editError, setEditError] = useState<string | null>(null);
   const [editSuccess, setEditSuccess] = useState(false);
 
+  const cargarDatos = async () => {
+    try {
+      const [resInsc, resTrab] = await Promise.all([
+        authFetch("/mi-inscripcion"),
+        authFetch("/trabajos"),
+      ]);
+      if (resInsc.ok) setInscripcion(await resInsc.json());
+      if (resTrab.ok) setTrabajos(await resTrab.json());
+    } catch (err) {
+      console.error("Error cargando datos:", err);
+    } finally {
+      setLoadingData(false);
+    }
+  };
+
   const inscripcionConfirmada = inscripcion?.estado === "confirmado";
 
   // ── Abrir modal con datos actuales ────────────────────
@@ -299,6 +314,7 @@ export default function Dashboard() {
       }
 
       await refreshUser();
+      await cargarDatos();
 
       setEditSuccess(true);
       setTimeout(() => {
@@ -314,21 +330,7 @@ export default function Dashboard() {
 
   // ── Cargar datos al montar ─────────────────────────────
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [resInsc, resTrab] = await Promise.all([
-          authFetch("/mi-inscripcion"),
-          authFetch("/trabajos"),
-        ]);
-        if (resInsc.ok) setInscripcion(await resInsc.json());
-        if (resTrab.ok) setTrabajos(await resTrab.json());
-      } catch (err) {
-        console.error("Error cargando datos:", err);
-      } finally {
-        setLoadingData(false);
-      }
-    };
-    fetchData();
+    cargarDatos();
 
     const interval = setInterval(async () => {
       try {
@@ -461,9 +463,10 @@ export default function Dashboard() {
     return [];
   };
 
+  const tipoActual = user?.tipo_inscripcion ?? inscripcion?.tipo;
   const puedeSubirTrabajos =
     inscripcion &&
-    ["participante_activo", "experiencia_total"].includes(inscripcion.tipo) &&
+    ["participante_activo", "experiencia_total"].includes(tipoActual ?? "") &&
     inscripcion.estado === "confirmado";
 
   // ── Render ─────────────────────────────────────────────
