@@ -198,7 +198,7 @@ function Field({
 
 // ── Componente principal ───────────────────────────────────
 export default function Dashboard() {
-  const { user, logout, authFetch} = useAuth();
+  const { user, logout, authFetch, refreshUser } = useAuth();
 
   const [inscripcion, setInscripcion] = useState<Inscripcion | null>(null);
   const [trabajos, setTrabajos] = useState<Trabajo[]>([]);
@@ -297,6 +297,8 @@ export default function Dashboard() {
         );
         return;
       }
+
+      await refreshUser();
 
       setEditSuccess(true);
       setTimeout(() => {
