@@ -4,7 +4,12 @@ import { Card, CardContent } from "./ui/card";
 import { Button } from "./ui/button";
 import { ActivityModal } from "./modals/ActivityModal";
 
-export type ActivityType = "BioTalk" | "Convocatoria" | "Panel" | "Ponencia"|"Actividad";
+export type ActivityType =
+  | "BioTalk"
+  | "Convocatoria"
+  | "Panel"
+  | "Ponencia"
+  | "Actividad";
 
 export interface Activity {
   id: string;
@@ -244,6 +249,135 @@ export function Actividades() {
         {/* FILTROS */}
         <div className="flex justify-center gap-3 mb-12 flex-wrap">
           {/* botones tipo */}
+        </div>
+
+        {/* DISCLAIMER */}
+        {/* DISCLAIMER */}
+        <div
+          style={{
+            background: "var(--color-background-primary)",
+            border: "0.5px solid #d1d5db",
+            borderRadius: "12px",
+            overflow: "hidden",
+            marginBottom: "48px",
+          }}
+        >
+          <div
+            style={{
+              background: "#1a6b3a",
+              padding: "10px 20px",
+              display: "flex",
+              alignItems: "center",
+              gap: "8px",
+            }}
+          >
+            <div style={{ display: "flex", gap: "6px" }}>
+              {[0, 1, 2].map((i) => (
+                <div
+                  key={i}
+                  style={{
+                    width: "10px",
+                    height: "10px",
+                    borderRadius: "50%",
+                    background: "#e6c619",
+                  }}
+                />
+              ))}
+            </div>
+            <span
+              style={{
+                color: "#fff",
+                fontSize: "13px",
+                fontWeight: 500,
+                marginLeft: "8px",
+              }}
+            >
+              Fechas importantes · EEBB 2026
+            </span>
+          </div>
+
+          <div style={{ padding: "0 24px" }}>
+            {[
+              {
+                dia: "10",
+                label: "ABRIL",
+                texto:
+                  "Fecha límite de inscripción a convocatorias y envío de trabajos",
+              },
+              {
+                dia: "15",
+                label: "ABRIL",
+                texto: "Fecha límite de pago y registro al evento (asistentes)",
+              },
+              { dia: "16 & 17", label: "ABRIL", texto: "Evento EEBB 2026" },
+            ].map((item, i, arr) => (
+              <div
+                key={i}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "20px",
+                  padding: "20px 0",
+                  borderBottom:
+                    i < arr.length - 1 ? "1px dashed #d1d5db" : "none",
+                }}
+              >
+                <div style={{ minWidth: "60px", textAlign: "center" }}>
+                  <div
+                    style={{
+                      fontSize: item.dia.length > 2 ? "26px" : "36px",
+                      fontWeight: 500,
+                      color: "#1a6b3a",
+                      lineHeight: 1,
+                    }}
+                  >
+                    {item.dia}
+                  </div>
+                  <div
+                    style={{
+                      fontSize: "11px",
+                      fontWeight: 500,
+                      color: "#6b7280",
+                      letterSpacing: "0.08em",
+                    }}
+                  >
+                    {item.label}
+                  </div>
+                </div>
+                <div
+                  style={{
+                    fontSize: "13px",
+                    fontWeight: 500,
+                    textTransform: "uppercase",
+                    letterSpacing: "0.04em",
+                    lineHeight: 1.5,
+                  }}
+                >
+                  {item.texto}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div
+            style={{
+              background: "#f9fafb",
+              padding: "12px 20px",
+              borderTop: "0.5px solid #e5e7eb",
+            }}
+          >
+            <p
+              style={{
+                fontSize: "12px",
+                color: "#6b7280",
+                margin: 0,
+                lineHeight: 1.5,
+              }}
+            >
+              * Recuerda que si eres participante tu pago debe ser validado
+              antes del envío de tu trabajo, evita contratiempos.
+            </p>
+          </div>
         </div>
 
         {/* GRID */}
