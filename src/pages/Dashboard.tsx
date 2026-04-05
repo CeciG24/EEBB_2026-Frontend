@@ -198,7 +198,7 @@ function Field({
 
 // ── Componente principal ───────────────────────────────────
 export default function Dashboard() {
-  const { user, logout, authFetch} = useAuth();
+  const { user, logout, authFetch, refreshUser } = useAuth();
 
   const [inscripcion, setInscripcion] = useState<Inscripcion | null>(null);
   const [trabajos, setTrabajos] = useState<Trabajo[]>([]);
@@ -225,6 +225,21 @@ export default function Dashboard() {
   const [editSaving, setEditSaving] = useState(false);
   const [editError, setEditError] = useState<string | null>(null);
   const [editSuccess, setEditSuccess] = useState(false);
+
+  const cargarDatos = async () => {
+    try {
+      const [resInsc, resTrab] = await Promise.all([
+        authFetch("/mi-inscripcion"),
+        authFetch("/trabajos"),
+      ]);
+      if (resInsc.ok) setInscripcion(await resInsc.json());
+      if (resTrab.ok) setTrabajos(await resTrab.json());
+    } catch (err) {
+      console.error("Error cargando datos:", err);
+    } finally {
+      setLoadingData(false);
+    }
+  };
 
   const inscripcionConfirmada = inscripcion?.estado === "confirmado";
 
@@ -298,6 +313,9 @@ export default function Dashboard() {
         return;
       }
 
+      await refreshUser();
+      await cargarDatos();
+
       setEditSuccess(true);
       setTimeout(() => {
         setEditOpen(false);
@@ -312,21 +330,7 @@ export default function Dashboard() {
 
   // ── Cargar datos al montar ─────────────────────────────
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [resInsc, resTrab] = await Promise.all([
-          authFetch("/mi-inscripcion"),
-          authFetch("/trabajos"),
-        ]);
-        if (resInsc.ok) setInscripcion(await resInsc.json());
-        if (resTrab.ok) setTrabajos(await resTrab.json());
-      } catch (err) {
-        console.error("Error cargando datos:", err);
-      } finally {
-        setLoadingData(false);
-      }
-    };
-    fetchData();
+    cargarDatos();
 
     const interval = setInterval(async () => {
       try {
@@ -459,9 +463,10 @@ export default function Dashboard() {
     return [];
   };
 
+  const tipoActual = user?.tipo_inscripcion ?? inscripcion?.tipo;
   const puedeSubirTrabajos =
     inscripcion &&
-    ["participante_activo", "experiencia_total"].includes(inscripcion.tipo) &&
+    ["participante_activo", "experiencia_total"].includes(tipoActual ?? "") &&
     inscripcion.estado === "confirmado";
 
   // ── Render ─────────────────────────────────────────────
@@ -1050,6 +1055,7 @@ export default function Dashboard() {
                           <option value="">Selecciona</option>
                           <option value="preparatoria">Preparatoria</option>
                           <option value="universidad">Universidad</option>
+                          <option value="posgrado">Posgrado</option>
                         </select>
                       </div>
                       <div>

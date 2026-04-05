@@ -243,6 +243,7 @@ export default function Register() {
               <option value="">Selecciona un nivel</option>
               <option value="preparatoria">Bachillerato / Preparatoria</option>
               <option value="universidad">Universidad / Licenciatura</option>
+              <option value="posgrado">Posgrado</option>
             </select>
           </Field>
 
@@ -299,7 +300,7 @@ export default function Register() {
             >
               <option value="">Selecciona una modalidad</option>
               <option value="asistente">
-                Asistente — $150 prepa / $300 uni
+                Asistente — $150 prepa / $300 uni-posgrado
               </option>
               <option value="participante_activo">
                 Participante Activo — $450
