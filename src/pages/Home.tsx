@@ -12,6 +12,7 @@ import { Footer } from "../components/Footer";
 import { Actividades } from "../components/Activities";
 import { Committee } from "../components/Committee";
 import { PagoDatos } from "../components/PagoDatos";
+import { Constancias } from "../components/Constancias";
 
 export default function Home() {
   return (
@@ -27,6 +28,7 @@ export default function Home() {
         <Premios />
         <Registration />
         <PagoDatos />
+        <Constancias />
         <Committee />
         <FAQ />
         <Contacto />

@@ -58,6 +58,9 @@ export function Header() {
             <button onClick={() => scrollToSection("premios")} className="text-gray-600 hover:text-gray-900 transition-colors">
               Premios
             </button>
+            <button onClick={() => scrollToSection("constancias")} className="text-gray-600 hover:text-gray-900 transition-colors">
+              Constancias
+            </button>
             <button onClick={() => scrollToSection("faq")} className="text-gray-600 hover:text-gray-900 transition-colors">
               FAQ
             </button>
@@ -98,6 +101,9 @@ export function Header() {
               </button>
               <button onClick={() => scrollToSection("costos")} className="text-gray-600 hover:text-gray-900 text-left">
                 Costos
+              </button>
+              <button onClick={() => scrollToSection("constancias")} className="text-gray-600 hover:text-gray-900 text-left">
+                Constancias
               </button>
               <button onClick={() => scrollToSection("faq")} className="text-gray-600 hover:text-gray-900 text-left">
                 Preguntas Frecuentes
